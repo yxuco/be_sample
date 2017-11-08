@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cluster xmlns="http://tibco.com/businessevents/configuration/5.4">
+    <revision>
+        <version>26</version>
+        <author>yxu</author>
+        <date>2017/11/07 15:38:42</date>
+        <comment/>
+    </revision>
+    <name>SimpleHTTP</name>
+    <message-encoding>UTF-8</message-encoding>
+    <object-management>
+        <memory-manager/>
+        <db-concepts>
+            <db-uris/>
+            <check-interval>60</check-interval>
+            <inactivity-timeout>0</inactivity-timeout>
+            <initial-size>5</initial-size>
+            <max-size>5</max-size>
+            <min-size>5</min-size>
+            <property-check-interval>900</property-check-interval>
+            <retry-count>-1</retry-count>
+            <wait-timeout>1</wait-timeout>
+        </db-concepts>
+    </object-management>
+    <rulesets>
+        <rules id="all-rules">
+            <uri>/</uri>
+        </rules>
+    </rulesets>
+    <function-groups>
+        <functions id="all-functions">
+            <uri>/</uri>
+        </functions>
+    </function-groups>
+    <destination-groups/>
+    <process-groups/>
+    <log-configs>
+        <log-config id="logConfig">
+            <enabled>true</enabled>
+            <roles>*:info</roles>
+            <files>
+                <enabled>true</enabled>
+                <dir>logs</dir>
+                <name/>
+                <max-number>10</max-number>
+                <max-size>5000000</max-size>
+                <append>false</append>
+            </files>
+            <terminal>
+                <enabled/>
+                <sys-out-redirect>false</sys-out-redirect>
+                <sys-err-redirect>false</sys-err-redirect>
+                <encoding/>
+            </terminal>
+            <line-layout>
+                <enabled>false</enabled>
+                <class/>
+                <arg/>
+            </line-layout>
+        </log-config>
+    </log-configs>
+    <agent-classes>
+        <inference-agent-class id="service-inf-class">
+            <rules>
+                <uri>/Rules/Cloudy</uri>
+                <uri>/Rules/Clear</uri>
+                <uri>/Rules/Rain</uri>
+                <uri>/Rules/Shower</uri>
+                <uri>/Rules/Other</uri>
+                <uri>/Rules/EndSession</uri>
+                <uri>/Rules/Snow</uri>
+            </rules>
+            <destinations>
+                <destination id="getWeather_1">
+                    <pre-processor>/RuleFunctions/processRequest</pre-processor>
+                    <queue-size>100</queue-size>
+                    <thread-count>3</thread-count>
+                    <threading-model>workers</threading-model>
+                    <thread-affinity-rule-function/>
+                    <uri>/Channels/HTTP/getWeather</uri>
+                </destination>
+            </destinations>
+            <startup>
+                <uri>/RuleFunctions/startup</uri>
+            </startup>
+            <shutdown/>
+            <local-cache>
+                <eviction>
+                    <max-size>1024</max-size>
+                    <max-time>900</max-time>
+                </eviction>
+            </local-cache>
+            <shared-queue>
+                <size>1024</size>
+                <workers>10</workers>
+            </shared-queue>
+            <load>
+                <max-active/>
+            </load>
+            <concurrent-rtc>true</concurrent-rtc>
+            <check-for-duplicates>false</check-for-duplicates>
+            <businessworks>
+                <uri/>
+            </businessworks>
+            <property-group/>
+        </inference-agent-class>
+        <inference-agent-class id="test-inf-class">
+            <rules>
+                <uri>/TestDriver/invokeTest</uri>
+            </rules>
+            <destinations/>
+            <startup>
+                <uri>/RuleFunctions/startup</uri>
+                <uri>/TestDriver/startDriver</uri>
+            </startup>
+            <shutdown/>
+            <local-cache>
+                <eviction>
+                    <max-size>1024</max-size>
+                    <max-time>900</max-time>
+                </eviction>
+            </local-cache>
+            <shared-queue>
+                <size>1024</size>
+                <workers>10</workers>
+            </shared-queue>
+            <load>
+                <max-active/>
+            </load>
+            <concurrent-rtc>false</concurrent-rtc>
+            <check-for-duplicates>false</check-for-duplicates>
+            <businessworks>
+                <uri/>
+            </businessworks>
+            <property-group/>
+        </inference-agent-class>
+    </agent-classes>
+    <processing-units>
+        <processing-unit id="ServicePU">
+            <agents>
+                <agent>
+                    <ref>service-inf-class</ref>
+                    <key>SimpleHTTP-1</key>
+                    <priority/>
+                </agent>
+            </agents>
+            <logs>logConfig</logs>
+            <hot-deploy>false</hot-deploy>
+            <cache-storage-enabled>false</cache-storage-enabled>
+            <db-concepts>false</db-concepts>
+            <property-group/>
+        </processing-unit>
+        <processing-unit id="TestPU">
+            <agents>
+                <agent>
+                    <ref>test-inf-class</ref>
+                    <key>TestDriver-1</key>
+                    <priority/>
+                </agent>
+            </agents>
+            <logs>logConfig</logs>
+            <hot-deploy>false</hot-deploy>
+            <cache-storage-enabled>false</cache-storage-enabled>
+            <db-concepts>false</db-concepts>
+            <property-group/>
+        </processing-unit>
+    </processing-units>
+    <load-balancer-configs>
+        <pair-configs/>
+        <adhoc-configs/>
+    </load-balancer-configs>
+    <property-group>
+        <property-group comment="" name="auth">
+            <property name="be.mm.auth.type" value="file"/>
+            <property name="be.mm.auth.file.location" value="/usr/local/tibco_be/be/5.4/mm/config/users.pwd"/>
+            <property name="java.security.auth.login.config" value="/usr/local/tibco_be/be/5.4/mm/config/jaas-config.config"/>
+        </property-group>
+        <property name="tibco.clientVar.STAT_RESET_INTERVAL" value="15000"/>
+        <property name="tibco.clientVar.TEST_INTERVAL" value="10000"/>
+    </property-group>
+</cluster>

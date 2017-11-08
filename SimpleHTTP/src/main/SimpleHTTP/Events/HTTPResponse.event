@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/" folder="/Events/" name="HTTPResponse" description="" GUID="3B33B868-3AF5-1CDD-CA82-4C73B68C1309" ownerProjectName="SimpleHTTP" superEventPath="" ttlUnits="Seconds">
+  <properties name="HttpStatusCode" ownerProjectName="SimpleHTTP" type="int" ownerPath="/Events/HTTPResponse"/>
+  <namespaceEntries prefix="xsd" namespace="http://www.w3.org/2001/XMLSchema"/>
+  <expiryAction folder="/Events/HTTPResponse" name="HTTPResponse_expiryAction" ownerProjectName="SimpleHTTP" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="httpresponse" type="/Events/HTTPResponse"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testdata name="HTTPRequest" folder="TestData" project="SimpleHTTP" entityPath="/Events/HTTPRequest" type="SimpleEvent"><ns0:HTTPRequest xmlns:ns0="www.tibco.com/be/ontology/Events/HTTPRequest" isSelected="true"><name>Denver,CO</name></ns0:HTTPRequest><ns0:HTTPRequest xmlns:ns0="www.tibco.com/be/ontology/Events/HTTPRequest" isSelected="true"><name>XYZ</name></ns0:HTTPRequest></testdata>

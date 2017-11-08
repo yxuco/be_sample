@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Scorecard xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/" folder="/" name="Constants" description="" GUID="4FF98850-0A66-F568-690D-A1592B8C8B16" ownerProjectName="SimpleHTTP" scorecard="true">
+  <properties name="Completed" ownerProjectName="SimpleHTTP" ownerPath="/Constants"/>
+  <properties name="Failed" ownerProjectName="SimpleHTTP" ownerPath="/Constants"/>
+  <properties name="ServiceReply" ownerProjectName="SimpleHTTP" ownerPath="/Constants"/>
+  <properties name="Session" ownerProjectName="SimpleHTTP" ownerPath="/Constants"/>
+</element:Scorecard>

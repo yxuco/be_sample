@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by TIBCO BusinessEvents POM generation utility be-maven-pom-generator
+  Creation datetime: Thu Nov 02 21:21:51 MDT 2017
+-->
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.tibco.psg.sample</groupId>
+  <artifactId>SimpleHTTP</artifactId>
+  <version>1.0.0</version>
+  <packaging>ear</packaging>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.tibco.be.maven.plugin</groupId>
+        <artifactId>be-maven-plugin</artifactId>
+        <version>5.4.1</version>
+        <extensions>true</extensions>
+        <configuration>
+          <beProjectDetails>
+            <beHome>/usr/local/tibco_be/be/5.4</beHome>
+            <earLocation>target</earLocation>
+            <projLibLocation>target</projLibLocation>
+          </beProjectDetails>
+          <projLibResources/>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>okhttp</artifactId>
+      <version>3.9.0</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+    </dependency>
+  </dependencies>
+  <properties>
+    <reuseForks>false</reuseForks>
+  </properties>
+</project>
+

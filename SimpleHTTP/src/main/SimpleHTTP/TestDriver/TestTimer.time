@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><event:TimeEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/TestDriver/" folder="/TestDriver/" name="TestTimer" description="" GUID="DB8AB984-C28B-C383-FC68-C1A3A8C361C3" ownerProjectName="SimpleHTTP" type="TimeEvent" superEventPath=""/>

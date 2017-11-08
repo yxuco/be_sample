@@ -1,0 +1,41 @@
+/**
+ * @description call Yahoo weather API, and parse JSON response to extract weather condition for specified city-state
+ */
+String rulefunction RuleFunctions.queryYahooWeather {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		String cityState; // city, state
+	}
+	body {
+		long startTime = System.nanoTime();
+		Object logger = Log.getLogger("RuleFunctions.queryYahooWeather");
+
+		String query = String.format("select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=\"%s\")", cityState);
+		Log.log(logger, "info", "Query Yahoo: %s", query);
+
+		String url = "https://query.yahooapis.com/v1/public/yql?q=" + HTTP.encodeURL(query, "UTF-8") + "&format=json";
+		Object conn = HTTP.ConnectionInfo.createHTTPConnectionInfo(true);
+		Events.HTTPResponse resp = HTTP.sendRequest(url, Events.HTTPRequest.HTTPRequest(null, null, null), "/Events/HTTPResponse", 10000, conn);
+		String json = resp@payload;
+		int status = resp.HttpStatusCode;
+		Log.log(logger, "info", "Yahoo response status: %d, data: %s", status, json);
+		
+		if (status < 300) {
+			Stats.writeStat(Constants.Completed, System.nanoTime() - startTime, null);
+			if (204 == status) {
+				return ""; // No Content
+			} else {
+				// parse JSON response and extract weather condition
+				Object node = JSON.parseJSON(json);
+				Object consNode = JSON.findNode(node, "condition");
+				return String.format("%s", consNode);
+			}
+		} else {
+			// service error
+			Stats.writeStat(Constants.Failed, System.nanoTime() - startTime, null);
+			return null;
+		}
+	}
+}

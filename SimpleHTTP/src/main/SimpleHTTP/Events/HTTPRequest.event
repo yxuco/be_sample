@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/" folder="/Events/" name="HTTPRequest" description="curl http://localhost:9090/Channels/HTTP/getWeather?name=broomfield,co" GUID="65261FD7-ECFF-5D71-CE47-811F92250D12" ownerProjectName="SimpleHTTP" superEventPath="" ttlUnits="Seconds" channelURI="/Channels/HTTP" destinationName="getWeather">
+  <properties name="name" ownerProjectName="SimpleHTTP" ownerPath="/Events/HTTPRequest"/>
+  <expiryAction name="HTTPRequest_expiryAction" ownerProjectName="SimpleHTTP" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="httprequest" type="/Events/HTTPRequest"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

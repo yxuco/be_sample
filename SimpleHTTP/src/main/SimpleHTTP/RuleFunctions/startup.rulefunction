@@ -1,0 +1,28 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.startup {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		// initialize stat collector and monitoring DB
+		Stats.initResetInterval(System.getGlobalVariableAsInt("STAT_RESET_INTERVAL",5000));
+		Stats.initInfluxDB(
+			System.getGlobalVariableAsString("INFLUX_HOST","localhost"),
+			System.getGlobalVariableAsString("INFLUX_PORT","8086"),
+			System.getGlobalVariableAsString("INFLUX_DB","bemon"),
+			System.getGlobalVariableAsString("INFLUX_USER","admin"),
+			System.getGlobalVariableAsString("INFLUX_PASSWORD","admin"),
+			System.getGlobalVariableAsString("INFLUX_MEASURMENT","stat"));
+		
+		// initialize constants
+		Constants.Completed = "COMPLETED";
+		Constants.Failed = "FAILED";
+		Constants.ServiceReply = "SERVICE_REPLY";
+		Constants.Session = "SESSION";
+	}
+}

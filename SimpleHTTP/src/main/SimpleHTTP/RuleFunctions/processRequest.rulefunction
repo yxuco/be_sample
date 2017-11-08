@@ -1,0 +1,64 @@
+/**
+ * @description 
+ */
+void rulefunction RuleFunctions.processRequest {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Events.HTTPRequest req;
+	}
+	body {
+		long startTime = System.nanoTime();
+		Object logger = Log.getLogger("RuleFunctions.processRequest");
+		Log.log(logger, "info", "Received request for weather at %s", req.name);
+
+		// keep sesson context for end-of-RTC processes
+		Event.assertEvent(Events.SessionContext.SessionContext(
+			null /*extId String */,
+			null /*payload String */,
+			startTime /*startTime long */,
+			req@id/*requestId long */));
+
+		try {
+			// call Yahoo weather API, load response into transient concept instance
+			int status = 200;
+			String weatherJson = RuleFunctions.queryYahooWeather(req.name);
+			if (null == weatherJson) {
+				status = 500;
+				weatherJson = "{\"error\": \"Service failed\"}";
+			} else if ("" == weatherJson) {
+				status = 204;
+				weatherJson = "{\"error\": \"No content\"}";
+			}
+			
+			// send HTTP service reply
+			Log.log(logger, "info", "Send response for %s status %d", req.name, status);
+			Event.replyEvent(req, Events.HTTPResponse.HTTPResponse(
+				null /*extId String */, 
+				String.format("Weather condition at %s:\n%s\n", req.name, weatherJson) /*payload String */,
+				status /*HttpStatusCode int */));
+			Stats.writeStat(Constants.ServiceReply, System.nanoTime() - startTime, null);
+
+			if (200 == status) {
+				Concepts.WeatherData data = Instance.createTransientInstanceFromJSON("/Concepts/WeatherData", weatherJson);
+				Log.log(logger, "info", "Weather concept: code=%s, temp=%s, text=%s", data.code, data.temp, data.text);
+
+				// assert weather event to fire rules
+				Events.WeatherCondition weather = Events.WeatherCondition.WeatherCondition(
+					null /*extId String */,
+					null /*payload String */,
+					req.name /*cityState String */,
+					DateTime.now() /*tmstp DateTime */,
+					data.temp /*temperature String */,
+					data.text /*condition String */);
+				Event.assertEvent(weather);
+			}
+			Log.log(logger, "info", "Preprocessor completed for %s", req.name);
+			Stats.writeStat(Constants.Completed, System.nanoTime() - startTime, null);
+		} catch (Exception e) {
+			Log.logException(logger, "error", "Exception caught.", e, null);
+			Stats.writeStat(Constants.Failed, System.nanoTime() - startTime, null);
+		}
+	}
+}

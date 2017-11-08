@@ -1,0 +1,22 @@
+/**
+ * @description last rule at end of rule cycle: log session stats
+ * @author 
+ */
+rule Rules.EndSession {
+	attribute {
+		priority = 10;
+		forwardChain = true;
+	}
+	declare {
+		Events.HTTPRequest req;
+		Events.SessionContext context;
+	}
+	when {
+		context.requestId == req@id;
+	}
+	then {
+		Object logger = Log.getLogger("Rules.EndSession");
+		Log.log(logger, "info", "city %s, session time %d", req.name, System.nanoTime() - context.startTime);
+		Stats.writeStat(Constants.Session, System.nanoTime() - context.startTime, null);
+	}
+}

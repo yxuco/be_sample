@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Scorecard xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/" folder="/" name="StateCapitals" description="" GUID="9967F731-9BCE-F12F-F2C6-A3C610008526" ownerProjectName="SimpleHTTP" scorecard="true">
+  <properties name="cityState" ownerProjectName="SimpleHTTP" array="true" ownerPath="/StateCapitals"/>
+</element:Scorecard>

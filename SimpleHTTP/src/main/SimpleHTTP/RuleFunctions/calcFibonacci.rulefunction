@@ -1,0 +1,25 @@
+/**
+ * @description 
+ */
+long rulefunction RuleFunctions.calcFibonacci {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		int step;
+	}
+	body {
+		long startTime = System.nanoTime();
+		Object logger = Log.getLogger("RuleFunctions.calcFibonacci");
+		long n0 = 1;
+		long n1 = 1;
+		for (int i = 0; i < step; i++) {
+			long tmp = n0;
+			n0 = n1;
+			n1 = tmp + n0;
+		}
+		Log.log(logger, "info", "Step %d: Fibonacci %d", step, n1);
+		Stats.writeStat(Constants.Completed, System.nanoTime() - startTime, null);
+		return n1;
+	}
+}

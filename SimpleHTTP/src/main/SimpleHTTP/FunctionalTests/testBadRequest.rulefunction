@@ -1,0 +1,31 @@
+/**
+ * @description return error message if test failed, null otherwise.
+ */
+String rulefunction FunctionalTests.testBadRequest {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		String url = String.format("http://%s:%s/Channels/HTTP/getWeather",
+			System.getGlobalVariableAsString("GREETING_HOST", "localhost"),
+			System.getGlobalVariableAsString("GREETING_PORT", "9090"));
+		Object conn = HTTP.ConnectionInfo.createHTTPConnectionInfo(false);
+		try {
+			Events.HTTPResponse resp = HTTP.sendRequest(url, Events.HTTPRequest.HTTPRequest(null, null, "XYZ"), "/Events/HTTPResponse", 10000, conn);
+			if (null == null) {
+				// null is returned for status 204 - a product defect, assume it passes
+				return null;
+			} else if (resp.HttpStatusCode == 204) {
+				// test passed
+				return null;
+			} else {
+				return "Status code " + resp.HttpStatusCode + " is not 204";
+			}
+		} catch (Exception e) {
+			return "Exception: " + e@message + " - " + e@stackTrace;
+		}
+	}
+}

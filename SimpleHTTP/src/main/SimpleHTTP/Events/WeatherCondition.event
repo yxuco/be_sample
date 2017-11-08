@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/" folder="/Events/" name="WeatherCondition" description="" GUID="C42200B1-D5A0-C93D-2C2C-3477C5B6E006" ownerProjectName="SimpleHTTP" superEventPath="" ttlUnits="Seconds">
+  <properties name="cityState" ownerProjectName="SimpleHTTP" ownerPath="/Events/WeatherCondition"/>
+  <properties name="tmstp" ownerProjectName="SimpleHTTP" type="DateTime" ownerPath="/Events/WeatherCondition"/>
+  <properties name="temperature" ownerProjectName="SimpleHTTP" ownerPath="/Events/WeatherCondition"/>
+  <properties name="condition" ownerProjectName="SimpleHTTP" ownerPath="/Events/WeatherCondition"/>
+  <expiryAction folder="/Events/WeatherCondition" name="WeatherCondition_expiryAction" ownerProjectName="SimpleHTTP" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="weathercondition" type="/Events/WeatherCondition"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

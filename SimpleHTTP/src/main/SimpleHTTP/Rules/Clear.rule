@@ -1,0 +1,23 @@
+/**
+ * @description 
+ * @author
+ */
+rule Rules.Clear {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.WeatherCondition weather;
+	}
+	when {
+		String.matches(weather.condition, ".*(Clear|Sunny).*");
+	}
+	then {
+		long startTime = System.nanoTime();
+		Object logger = Log.getLogger("Rules.Clear");
+		Log.log(logger, "info", "city %s, weather %s temperature %s", weather.cityState, weather.condition, weather.temperature);
+		Stats.writeStat(Constants.Completed, System.nanoTime() - startTime, null);
+		Event.consumeEvent(weather);
+	}
+}

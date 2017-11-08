@@ -1,0 +1,31 @@
+/**
+ * @description 
+ * @author
+ */
+rule Rules.Cloudy {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.WeatherCondition weather;
+	}
+	when {
+		String.contains(weather.condition, "Cloudy");
+	}
+	then {
+		long startTime = System.nanoTime();
+		Object logger = Log.getLogger("Rules.Cloudy");
+		try {
+			long step = Number.longValue(weather.temperature, 10) / 2;
+			long fib = RuleFunctions.calcFibonacci(step);
+			Log.log(logger, "info", "city %s, weather %s temperature %s Fibonacci %d", weather.cityState, weather.condition, weather.temperature, fib);
+			Stats.writeStat(Constants.Completed, System.nanoTime() - startTime, null);
+		} catch (Exception e) {
+			Log.logException(logger, "error", "Exception caught.", e, null);
+			Stats.writeStat(Constants.Failed, System.nanoTime() - startTime, null);
+		} finally {
+			Event.consumeEvent(weather);
+		}
+	}
+}

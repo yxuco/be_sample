@@ -1,0 +1,23 @@
+/**
+ * @description 
+ * @author
+ */
+rule Rules.Other {
+	attribute {
+		priority = 6;
+		forwardChain = true;
+	}
+	declare {
+		Events.WeatherCondition weather;
+	}
+	when {
+		// other weather after all priority-5 rules
+	}
+	then {
+		long startTime = System.nanoTime();
+		Object logger = Log.getLogger("Rules.Other");
+		Log.log(logger, "info", "city %s, weather %s temperature %s", weather.cityState, weather.condition, weather.temperature);
+		Stats.writeStat(Constants.Completed, System.nanoTime() - startTime, null);
+		Event.consumeEvent(weather);
+	}
+}
