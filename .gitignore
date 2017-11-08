@@ -1,0 +1,4 @@
+**/target/
+**/JavaBin/
+**/logs/
+**/*.class
