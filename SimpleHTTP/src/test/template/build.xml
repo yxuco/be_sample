@@ -1,8 +1,8 @@
 <project name="SimpleHTTPTest" default="test">
-  <property name="test.build.dir" value="/Users/yxu/Developer/git/be/SimpleHTTP/target/test-classes"/>
-  <property name="test.src.dir" value="/Users/yxu/Developer/git/be/SimpleHTTP/src/test/java"/>
-  <property name="be.home" value="/usr/local/tibco_be/be/5.4"/>
-  <property name="m2.repo" value="/Users/yxu/.m2/repository"/>
+  <property name="test.build.dir" value="${project.build.testOutputDirectory}"/>
+  <property name="test.src.dir" value="${project.build.testSourceDirectory}"/>
+  <property name="be.home" value="${tibco.be.home}"/>
+  <property name="m2.repo" value="${settings.localRepository}"/>
 
   <path id="classpath.test">
 	<fileset dir="${be.home}/lib" includes="**/*.jar" />

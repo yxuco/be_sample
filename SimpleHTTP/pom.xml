@@ -5,12 +5,154 @@
 -->
 <project>
   <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.tibco.psg.be</groupId>
+    <artifactId>BEParent</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../BEParent/pom.xml</relativePath>
+  </parent>
+
   <groupId>com.tibco.psg.sample</groupId>
   <artifactId>SimpleHTTP</artifactId>
   <version>1.0.0</version>
   <packaging>ear</packaging>
+
+  <properties>
+    <reuseForks>false</reuseForks>
+    <!-- add extra jars for buiding ear -->
+    <be.studiotools.class.path>${settings.localRepository}/com/squareup/okhttp3/okhttp/3.9.0/okhttp-3.9.0.jar:${settings.localRepository}/com/squareup/okio/okio/1.13.0/okio-1.13.0.jar</be.studiotools.class.path>
+  </properties>
+
   <build>
+<!--
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+-->
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
+        <filtering>true</filtering>
+      </testResource>
+    </testResources>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <!-- generate BE project studio files from template -->
+          <execution>
+            <id>be-project-gen</id>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <phase>validate</phase>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>src/main/SimpleHTTP/template</directory>
+                  <filtering>true</filtering>
+                </resource>                                                       
+              </resources>
+              <outputDirectory>src/main/SimpleHTTP</outputDirectory>
+            </configuration>
+          </execution>                    
+          <!-- generate ant build.xml for test-compile from template -->
+          <execution>
+            <id>be-test-gen</id>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <phase>validate</phase>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>src/test/template</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+              <outputDirectory>${project.basedir}</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>be-test-config-gen</id>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <phase>validate</phase>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>src/test/resources</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+              <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- build ear for BE -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>be-build-ear</id>
+            <phase>compile</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- compile test code -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>be-test-compile</id>
+            <phase>test-compile</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>run-be-test</id>
+            <phase>test</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- cleanup extra folders -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>${project.basedir}/be</directory>
+            </fileset>
+            <fileset>
+              <directory>${project.basedir}/logs</directory>
+            </fileset>
+<!--
+            <fileset>
+              <directory>${project.basedir}/src/main/SimpleHTTP/JavaBin</directory>
+            </fileset>
+-->
+          </filesets>
+        </configuration>
+      </plugin>
+<!--
       <plugin>
         <groupId>com.tibco.be.maven.plugin</groupId>
         <artifactId>be-maven-plugin</artifactId>
@@ -18,29 +160,31 @@
         <extensions>true</extensions>
         <configuration>
           <beProjectDetails>
-            <beHome>/usr/local/tibco_be/be/5.4</beHome>
+            <beHome>${env.BE_HOME}</beHome>
             <earLocation>target</earLocation>
             <projLibLocation>target</projLibLocation>
           </beProjectDetails>
           <projLibResources/>
         </configuration>
       </plugin>
+-->
     </plugins>
   </build>
+
   <dependencies>
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>
       <artifactId>okhttp</artifactId>
-      <version>3.9.0</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-core</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
-  <properties>
-    <reuseForks>false</reuseForks>
-  </properties>
 </project>
-

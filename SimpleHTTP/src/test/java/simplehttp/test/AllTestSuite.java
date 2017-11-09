@@ -22,7 +22,7 @@ public class AllTestSuite {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		if (null == engine) {
-			engine = new BETestEngine("/Users/yxu/Developer/git/be/SimpleHTTP/src/test/resources/config.properties");
+			engine = new BETestEngine("/Users/yxu/Developer/git/be/SimpleHTTP/target/test-classes/config.properties");
 			engine.start();
 			helper = new TestDataHelper(engine);
 			expecter = new Expecter(engine);
