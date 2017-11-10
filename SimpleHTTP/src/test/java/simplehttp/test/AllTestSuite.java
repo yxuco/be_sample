@@ -22,7 +22,11 @@ public class AllTestSuite {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		if (null == engine) {
-			engine = new BETestEngine("/Users/yxu/Developer/git/be/SimpleHTTP/target/test-classes/config.properties");
+			// pass repoRoot to unit test when using studio, e.g., use VM args: -DrepoRoot=/git/be
+			String repoRoot = System.getProperty("repoRoot");
+			String baseDir = null == repoRoot ? "" : repoRoot + "/SimpleHTTP/";
+			System.out.println("baseDir=" + baseDir);
+			engine = new BETestEngine(baseDir + "target/config.properties");
 			engine.start();
 			helper = new TestDataHelper(engine);
 			expecter = new Expecter(engine);
