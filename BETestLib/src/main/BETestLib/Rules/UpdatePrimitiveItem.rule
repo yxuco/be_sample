@@ -1,0 +1,30 @@
+/**
+ * @description Update a PrimitiveItem using attributes of a PrimitiveEven
+ * @author Yuemings-MBP.hsd1.co.comcast.net
+ */
+rule Rules.UpdatePrimitiveItem {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		Events.PrimitiveEvent evt;
+		Concepts.PrimitiveItem obj;
+	}
+	when {
+		evt.aString == obj.aString;
+	}
+	then {
+		Object logger = Log.getLogger("Rules.UpdatePrimitiveItem");
+		Log.log(logger, "info", "Start update PrimitiveItem: %s", evt.aString);
+		
+		RuleFunctions.UpdateObject.updatePrimitiveItem(
+			obj /*aPrimitiveItem Concepts.PrimitiveItem */,
+			evt.aString /*aString String */,
+			evt.aBoolean /*aBoolean boolean */,
+			evt.anInt /*anInt int */,
+			evt.aLong /*aLong long */,
+			evt.aDouble /*aDouble double */,
+			evt.aDateTime /*aDateTime DateTime */);
+	}
+}

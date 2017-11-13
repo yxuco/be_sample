@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Events/" folder="/Events/" name="PrimitiveEvent" description="simple event with primitive properties" GUID="A58DE61A-5329-5B12-4C59-E74C5DE9C7C0" ownerProjectName="BETestLib" superEventPath="" ttlUnits="Seconds">
+  <properties name="aString" ownerProjectName="BETestLib" ownerPath="/Events/PrimitiveEvent"/>
+  <properties name="aBoolean" ownerProjectName="BETestLib" type="boolean" ownerPath="/Events/PrimitiveEvent"/>
+  <properties name="anInt" ownerProjectName="BETestLib" type="int" ownerPath="/Events/PrimitiveEvent"/>
+  <properties name="aLong" ownerProjectName="BETestLib" type="long" ownerPath="/Events/PrimitiveEvent"/>
+  <properties name="aDouble" ownerProjectName="BETestLib" type="double" ownerPath="/Events/PrimitiveEvent"/>
+  <properties name="aDateTime" ownerProjectName="BETestLib" type="DateTime" ownerPath="/Events/PrimitiveEvent"/>
+  <expiryAction name="PrimitiveEvent_expiryAction" ownerProjectName="BETestLib" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="primitiveevent" type="/Events/PrimitiveEvent"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

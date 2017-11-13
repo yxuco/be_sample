@@ -1,0 +1,26 @@
+/**
+ * @description Test BE event of matching payload with true condition
+ */
+void rulefunction Test.BE_AssertionTest.testTrueEventPayload {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Events.PrimitiveEvent evt = Events.PrimitiveEvent.PrimitiveEvent(
+			null /*extId String */,
+			"my payload text" /*payload String */,
+			"first" /*aString String */,
+			true /*aBoolean boolean */,
+			1 /*anInt int */,
+			1L /*aLong long */,
+			1.0 /*aDouble double */,
+			DateTime.now() /*aDateTime DateTime */);
+			
+		assertThat("True event payload", 
+			evt, 
+			withPayload(equalTo("my payload text")));
+	}
+}

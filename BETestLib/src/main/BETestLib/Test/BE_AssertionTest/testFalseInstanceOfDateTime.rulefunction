@@ -1,0 +1,26 @@
+/**
+ * @description Test BE instanceOf DateTime with false condition
+ */
+void rulefunction Test.BE_AssertionTest.testFalseInstanceOfDateTime {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		String reason = "False instance of DateTime";
+		try {
+			assertThat(reason,
+				"", instanceOf("DateTime"));
+		}
+		catch (Exception e) {
+			if (isValidAssertionError(e, reason)) {
+				return;
+			} else {
+				fail(e@message);
+			}
+		}
+		fail(reason);
+	}
+}

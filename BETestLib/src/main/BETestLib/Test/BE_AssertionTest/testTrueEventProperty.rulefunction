@@ -1,0 +1,26 @@
+/**
+ * @description Test BE event of matching property with true condition
+ */
+void rulefunction Test.BE_AssertionTest.testTrueEventProperty {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Events.PrimitiveEvent evt = Events.PrimitiveEvent.PrimitiveEvent(
+			null /*extId String */,
+			"my payload text" /*payload String */,
+			"first" /*aString String */,
+			true /*aBoolean boolean */,
+			1 /*anInt int */,
+			1L /*aLong long */,
+			1.0 /*aDouble double */,
+			DateTime.now() /*aDateTime DateTime */);
+			
+		assertThat("True event primitive property", 
+			evt, 
+			withProperty("aString", equalTo("first")));
+	}
+}

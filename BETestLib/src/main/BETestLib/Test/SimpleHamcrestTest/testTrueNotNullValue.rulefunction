@@ -1,0 +1,16 @@
+/**
+ * @description Test Hamcrest not-null value with true condition
+ */
+void rulefunction Test.SimpleHamcrestTest.testTrueNotNullValue {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		assertThat("Simple true not-null value",
+			"",
+			notNullValue());
+	}
+}

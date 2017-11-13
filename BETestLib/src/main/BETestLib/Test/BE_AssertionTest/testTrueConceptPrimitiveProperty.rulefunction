@@ -1,0 +1,24 @@
+/**
+ * @description Test BE concept of matching primitive property with true condition
+ */
+void rulefunction Test.BE_AssertionTest.testTrueConceptPrimitiveProperty {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Concepts.PrimitiveItem pItem = RuleFunctions.CreateObject.createPrimitiveItem(
+			"first" /*aString String */,
+			true /*aBoolean boolean */,
+			1 /*anInt int */,
+			1 /*aLong long */,
+			1.0 /*aDouble double */,
+			DateTime.now() /*aDateTime DateTime */);
+			
+		assertThat("True concept primitive property", 
+			pItem, 
+			withProperty("aString", equalTo("first")));
+	}
+}

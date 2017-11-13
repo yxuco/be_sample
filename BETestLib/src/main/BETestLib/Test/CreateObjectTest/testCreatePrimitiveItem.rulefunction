@@ -1,0 +1,44 @@
+/**
+ * @description Test the function createPrimitiveItems, verify properties of the returned concept.
+ *
+ * @author Yueming Xu
+ */
+void rulefunction Test.CreateObjectTest.testCreatePrimitiveItem {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Object logger = Log.getLogger("Test.CreateObjectTest.testCreatePrimitiveItem");
+		Log.log(logger, "info", "Start test RuleFunctions.CreateObject.createPrimitiveItem");
+		
+		// call the rule function
+		String aString = "first";
+		boolean aBoolean = true;
+		int anInt = 1;
+		long aLong = 1L;
+		double aDouble = 1.0;
+		DateTime aDateTime = DateTime.now();
+		
+		Concepts.PrimitiveItem pItem = RuleFunctions.CreateObject.createPrimitiveItem(
+			aString /*aString String */,
+			aBoolean /*aBoolean boolean */,
+			anInt /*anInt int */,
+			aLong /*aLong long */,
+			aDouble /*aDouble double */,
+			aDateTime /*aDateTime DateTime */);
+
+		assertThat("PrimitiveItem must not be null", pItem, notNullValue());
+		assertTrue("PrimitiveItem must match the expected input data",
+			aString == pItem.aString &&
+			aBoolean == pItem.aBoolean &&
+			anInt == pItem.anInt &&
+			aLong == pItem.aLong &&
+			aDouble == pItem.aDouble &&
+			aDateTime == pItem.aDateTime);
+
+		Log.log(logger, "info", "Completed test RuleFunctions.CreateObject.createPrimitiveItem");
+	}
+}

@@ -1,0 +1,20 @@
+/**
+ * @description Use a worker to start a test in rule context immediately after engine startup.
+ *              This is an alternative way to test rules that cannot run during engine startup.
+ * @author Yueming Xu
+ */
+void rulefunction Test.RuleTest.RuleTestWorker.startRuleTest {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		testservice.RuleFunctions.dispatchTestWorker(
+			"RuleTestWorker" /*worker String */,
+			1 /*threads int */,
+			"/Test/RuleTest/RuleTestWorker/ruleTestAction" /*testFunction String */,
+			false /*inPreproc boolean */);
+	}
+}

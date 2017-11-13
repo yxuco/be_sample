@@ -1,0 +1,48 @@
+/**
+ * @description Process a timer event for a scheduled test. 
+ *              if the test is in preprocessor context, send a trigger event to start a test.
+ *              if the test is in rule context, invoke the test function directly.
+ * @author Yueming Xu
+ */
+rule testservice.TestScheduler.StartScheduledTest {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		testservice.TestScheduler.TestTimer timer;
+	}
+	when {
+		
+	}
+	then {
+		Object logger = Log.getLogger("testservice.TestScheduler.StartScheduledTest");
+		Log.log(logger, "info", "Start test of %s", timer@closure);
+		if (String.startsWith(timer@closure, "rule:")) {
+			String func = String.substringAfter(timer@closure, "rule:");
+			String[] fs = String[]{func};
+			if (String.contains(func, ";")) {
+                fs = String.split(func, ";");
+			}
+			for (int i = 0; i < fs@length; i++) {
+				String fi = String.trim(fs[i]);
+				if (String.length(fi) > 0) {
+                    Log.log(logger, "info", "Invoke test %s in rules context", fi);
+                    testservice.TestScheduler.printTestResult(fi,
+                    	testservice.RuleFunctions.invokeTest(fi));
+				}
+			}
+		}
+		else if (String.startsWith(timer@closure, "preproc:")) {
+			String func = String.substringAfter(timer@closure, "preproc:");
+			Log.log(logger, "info", "Send event trigger for preproc test %s", func);
+			Event.sendEvent(testservice.TestScheduler.PreprocTestTrigger.PreprocTestTrigger(
+				null /*extId String */,
+				"" /*payload String */,
+				func /*functionName String */));
+		}
+		else {
+			Log.log(logger, "warn", "invalid closure in test timer: %s", timer@closure);
+		}
+	}
+}

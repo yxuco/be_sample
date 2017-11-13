@@ -1,0 +1,27 @@
+/**
+ * @description Create and return a PrimitiveEvent
+ */
+Events.PrimitiveEvent rulefunction RuleFunctions.CreateObject.createPrimitiveEvent {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		String aString;
+		boolean aBoolean;
+		int anInt;
+		long aLong;
+		double aDouble;
+		DateTime aDateTime;		
+	}
+	body {
+		return Events.PrimitiveEvent.PrimitiveEvent(
+			null /*extId String */,
+			null /*payload String */,
+			aString /*aString String */,
+			aBoolean /*aBoolean boolean */,
+			anInt /*anInt int */,
+			aLong /*aLong long */,
+			aDouble /*aDouble double */,
+			aDateTime /*aDateTime DateTime */);
+	}
+}

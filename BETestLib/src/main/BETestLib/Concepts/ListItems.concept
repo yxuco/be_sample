@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Concepts/" folder="/Concepts/" name="ListItems" description="array properties of concept references" GUID="E974D3F3-3BE3-289A-4C08-6BC162138385" ownerProjectName="BETestLib" superConceptPath="" autoStartStateMachine="true">
+  <extendedProperties/>
+  <properties name="primitiveArrayRefs" ownerProjectName="BETestLib" type="ConceptReference" conceptTypePath="/Concepts/PrimitiveArrayItem" array="true" ownerPath="/Concepts/ListItems"/>
+  <properties name="primitiveRefs" ownerProjectName="BETestLib" type="ConceptReference" conceptTypePath="/Concepts/PrimitiveItem" array="true" ownerPath="/Concepts/ListItems"/>
+</element:Concept>

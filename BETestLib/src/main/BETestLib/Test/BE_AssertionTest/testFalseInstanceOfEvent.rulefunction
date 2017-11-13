@@ -1,0 +1,36 @@
+/**
+ * @description Test BE instanceOf event with false condition
+ */
+void rulefunction Test.BE_AssertionTest.testFalseInstanceOfEvent {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Events.PrimitiveEvent evt = Events.PrimitiveEvent.PrimitiveEvent(
+			null /*extId String */,
+			null /*payload String */,
+			"first" /*aString String */,
+			true /*aBoolean boolean */,
+			1 /*anInt int */,
+			1L /*aLong long */,
+			1.0 /*aDouble double */,
+			DateTime.now() /*aDateTime DateTime */);
+			
+		String reason = "False instance of event";
+		try {
+			assertThat(reason,
+				evt, instanceOf("/Events/NotDefinedEvent"));
+		}
+		catch (Exception e) {
+			if (isValidAssertionError(e, reason)) {
+				return;
+			} else {
+				fail(e@message);
+			}
+		}
+		fail(reason);
+	}
+}

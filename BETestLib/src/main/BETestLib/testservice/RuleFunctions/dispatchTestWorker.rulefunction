@@ -1,0 +1,23 @@
+/**
+ * @description Most rule tests cannot be invoked at engine startup, so use this helper to dispatch rule tests at engine startup.
+ */
+void rulefunction testservice.RuleFunctions.dispatchTestWorker {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		String worker;
+		int threads;
+		String testFunction; // e.g., /Test/RuleTest/allRuleTests
+		boolean inPreproc;
+	}
+	body {
+		Object logger = Log.getLogger("testservice.RuleFunctions.dispatchTestWorker");
+		Log.log(logger, "info", "start background work manager for rule tests");
+		
+		Cluster.createWorkManager(worker, threads);
+		
+		// pass dependent object Id to the worker, so it can load it from cache
+		Cluster.executeRuleFunction(worker, testFunction, inPreproc);
+	}
+}

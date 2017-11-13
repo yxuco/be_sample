@@ -1,0 +1,59 @@
+/**
+ * @description Test the function createContainer, verify all levels of contained and referenced object relationships.
+ * 
+ * @author Yueming Xu
+ */
+void rulefunction Test.CreateObjectTest.testCreateContainer {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Object logger = Log.getLogger("Test.CreateObjectTest.testCreateContainer");
+		Log.log(logger, "info", "Start test RuleFunctions.CreateObject.createContainer");
+		
+		Concepts.PrimitiveItem pItem = RuleFunctions.CreateObject.createPrimitiveItem(
+			"first" /*aString String */,
+			true /*aBoolean boolean */,
+			1 /*anInt int */,
+			1 /*aLong long */,
+			1.0 /*aDouble double */,
+			DateTime.now() /*aDateTime DateTime */);
+		Concepts.PrimitiveArrayItem paItem = RuleFunctions.CreateObject.createPrimitiveArrayItem(
+			"first" /*aString String */,
+			true /*aBoolean boolean */,
+			1 /*anInt int */,
+			1 /*aLong long */,
+			1.0 /*aDouble double */,
+			DateTime.now() /*aDateTime DateTime */);
+		Concepts.SingleItems sItem = RuleFunctions.CreateObject.createSingleItems(
+			paItem /*aPrimitiveArrayItem Concepts.PrimitiveArrayItem */,
+			pItem /*aPrimitiveItem Concepts.PrimitiveItem */);
+		Concepts.ListItems lItem = RuleFunctions.CreateObject.createListItems(
+			paItem /*aPrimitiveArrayItem Concepts.PrimitiveArrayItem */,
+			pItem /*aPrimitiveItem Concepts.PrimitiveItem */);
+		Concepts.Container con = RuleFunctions.CreateObject.createContainer(
+			sItem /*aSingleItems Concepts.SingleItems */,
+			lItem /*aListItems Concepts.ListItems */);
+		
+		assertThat("Correct array of contained concepts is in container",
+			con,
+			withProperty("arrayContained", hasItem(sameInstance(sItem))));
+		assertThat("Correct contained concept is in container",
+			con,
+			withProperty("containedArray", sameInstance(lItem)));
+		assertThat("Correct concept reference is in SingleItems",
+			sItem,
+			withProperty("primitiveArrayRef", sameInstance(paItem)));
+		assertThat("Correct array of concept references is in ListItems",
+			lItem,
+			withProperty("primitiveRefs", hasItem(sameInstance(pItem))));
+		assertThat("Correct array of strings is in PrimitiveArrayItem",
+			paItem,
+			withProperty("strings", hasItem(equalTo("first"))));
+
+		Log.log(logger, "info", "Completed test RuleFunctions.CreateObject.createContainer");
+	}
+}

@@ -1,0 +1,31 @@
+/**
+ * @description execute all BE assertion test; used for testing at engine start.
+ */
+void rulefunction Test.BE_AssertionTest.allBE_AssertionTests {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Object logger = Log.getLogger("Test.BE_AssertionTest.allBE_AssertionTests");
+		Log.log(logger, "info", "Start all BE Assertion Tests");
+		String[] tests = String[]{
+			"testTrueInstanceOfPrimitive", "testFalseInstanceOfDateTime",
+			"testTrueInstanceOfConcept", "testFalseInstanceOfConcept",
+			"testTrueInstanceOfEvent", "testFalseInstanceOfEvent",
+			"testTrueConceptPrimitiveProperty",
+			"testTrueConceptPrimitivePropertyArray",
+			"testTrueConceptReferenceProperty",
+			"testTrueConceptReferencePropertyArray",
+			"testTrueContainedConceptProperty",
+			"testTrueEventPayload",
+			"testTrueEventProperty"};
+
+		for (int i = 0; i < tests@length; i++) {
+			Engine.invokeRuleFunction("/Test/BE_AssertionTest/" + tests[i], null);
+			Log.log(logger, "info", "%s completed", tests[i]);
+		}
+	}
+}

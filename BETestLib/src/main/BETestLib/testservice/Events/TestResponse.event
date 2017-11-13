@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/testservice/Events/" folder="/testservice/Events/" name="TestResponse" description="String response data is returned as payload of this event.  The payload can be &quot;true&quot; or error message for test request, or resultset in JSON for query request." GUID="6750C06D-E565-EC83-6FFC-807A434C6393" ownerProjectName="BETestLib" superEventPath="" ttlUnits="Seconds">
+  <expiryAction folder="/testservice/Events/TestResponse" name="TestResponse_expiryAction" ownerProjectName="BETestLib" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="testresponse" type="/testservice/Events/TestResponse"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

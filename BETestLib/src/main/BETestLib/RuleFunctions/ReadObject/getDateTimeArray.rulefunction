@@ -1,0 +1,14 @@
+/**
+ * @description return array of datetime from PrimitiveArrayItem
+ */
+DateTime[] rulefunction RuleFunctions.ReadObject.getDateTimeArray {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.PrimitiveArrayItem primitiveArray;
+	}
+	body {
+		return Instance.PropertyArray.toArrayDateTime(primitiveArray.dateTimes);
+	}
+}

@@ -1,0 +1,38 @@
+/**
+ * @description Invoke the specified test in rule context, and return the test result in the payload of a TestResponse.
+ * @author Yueming Xu
+ */
+rule testservice.Rules.ProcessUpdateRequest {
+	attribute {
+		priority = 5;
+		forwardChain = true;
+	}
+	declare {
+		testservice.Events.TestRequest req;
+	}
+	when {
+		true != req.preproc;
+	}
+	then {
+		Object logger = Log.getLogger("testservice.Rules.ProcessUpdateRequest");
+		Log.log(logger, "info", "Invoke test %s in rules context", req.name);
+		TestResponse resp;
+		try {
+			String result = testservice.RuleFunctions.invokeTest(req.name);
+			resp = testservice.Events.TestResponse.TestResponse(
+				null /*extId String */,
+				result /*payload String */);
+		}
+		catch (Exception e) {
+			String msg = String.format("Exception: %s; StackTrace: %s", e@message, e@stackTrace);
+			resp = testservice.Events.TestResponse.TestResponse(
+				null /*extId String */,
+				msg /*payload String */);
+		}
+		finally {
+			Log.log(logger, "info", "%s returned %s", req.name, resp@payload);
+			Event.replyEvent(req, resp);
+			Event.consumeEvent(req);
+		}
+	}
+}

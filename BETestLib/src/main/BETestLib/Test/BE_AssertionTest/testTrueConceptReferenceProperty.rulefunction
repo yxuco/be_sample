@@ -1,0 +1,39 @@
+/**
+ * @description Test BE concept of matching concept reference property with true condition
+ */
+void rulefunction Test.BE_AssertionTest.testTrueConceptReferenceProperty {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Concepts.PrimitiveItem pItem2 = RuleFunctions.CreateObject.createPrimitiveItem(
+			"second" /*aString String */,
+			false /*aBoolean boolean */,
+			2 /*anInt int */,
+			3 /*aLong long */,
+			2.0 /*aDouble double */,
+			DateTime.now() /*aDateTime DateTime */);
+		Concepts.PrimitiveArrayItem paItem2 = Concepts.PrimitiveArrayItem.PrimitiveArrayItem(
+			null /*extId String */,
+			String[]{"first", "second"} /*strings String[] */,
+			boolean[]{true, false} /*booleans boolean[] */,
+			int[]{1, 2} /*ints int[] */,
+			long[]{1L, 2L} /*longs long[] */,
+			double[]{1.0, 2.0} /*doubles double[] */,
+			DateTime[]{DateTime.now(), DateTime.now()} /*dateTimes DateTime */);
+		Concepts.SingleItems sItem2 = RuleFunctions.CreateObject.createSingleItems(
+			paItem2 /*aPrimitiveArrayItem Concepts.PrimitiveArrayItem */,
+			pItem2 /*aPrimitiveItem Concepts.PrimitiveItem */);
+
+		// the referenced concept has a string array that contains a string "second"
+		assertThat("True concept reference property", 
+			sItem2, 
+			withProperty(
+				"primitiveArrayRef", 
+				withProperty("strings", hasItem(equalTo("second")))));
+		
+	}
+}

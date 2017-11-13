@@ -1,0 +1,24 @@
+/**
+ * @description Call this during engine startup to schedule rule tests
+ * @author Yueming Xu
+ */
+void rulefunction Test.RuleTest.scheduleRuleTests {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Object logger = Log.getLogger("Test.RuleTest.scheduleRuleTests");
+		Log.log(logger, "info", "Schedule tests for Rules.UpdatePrimitiveItem");
+		testservice.TestScheduler.scheduleTest(
+			"/Test/RuleTest/testUpdatePrimitiveItemInPreproc" /*functionName String */,
+			true /*isPreproc boolean */,
+			3000 /*delay long */);
+		testservice.TestScheduler.scheduleTest(
+			"/Test/RuleTest/testUpdatePrimitiveItemInRule" /*functionName String */,
+			false /*isPreproc boolean */,
+			5000 /*delay long */);
+	}
+}

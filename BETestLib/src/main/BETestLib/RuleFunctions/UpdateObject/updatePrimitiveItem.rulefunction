@@ -1,0 +1,27 @@
+/**
+ * @description update attributes of a PrimitiveItem, and return the updated Primitive concept.
+ */
+Concepts.PrimitiveItem rulefunction RuleFunctions.UpdateObject.updatePrimitiveItem {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.PrimitiveItem aPrimitiveItem;
+		String aString;
+		boolean aBoolean;
+		int anInt;
+		long aLong;
+		double aDouble;
+		DateTime aDateTime;		
+	}
+	body {
+		aPrimitiveItem.aString = aString;
+		aPrimitiveItem.aBoolean = aBoolean;
+		aPrimitiveItem.anInt = anInt;
+		aPrimitiveItem.aLong = aLong;
+		aPrimitiveItem.aDouble = aDouble;
+		aPrimitiveItem.aDateTime = aDateTime;
+		
+		return aPrimitiveItem;
+	}
+}

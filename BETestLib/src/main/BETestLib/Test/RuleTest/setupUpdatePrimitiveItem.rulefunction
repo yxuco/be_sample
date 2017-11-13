@@ -1,0 +1,34 @@
+/**
+ * @description Create concept required to test the rule UpdatePrimitiveItem.
+ *              This function will be called for all tests in this folder.
+ * @author Yueming Xu
+ */
+void rulefunction Test.RuleTest.setupUpdatePrimitiveItem {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Object logger = Log.getLogger("Test.RuleTest.setupUpdatePrimitiveItem");
+		Log.log(logger, "info", "Setup for tests of Rules.UpdatePrimitiveItem");
+		
+		// create concept for the rule
+		// Note: create object with specified extId only once. 
+		//       extId is required to load it from cache during the test.
+		String extId = "PI:UpdatePrimitiveItemRule";
+		Concepts.PrimitiveItem pItem = Instance.getByExtId(extId);
+		if (null == pItem) {
+			pItem = Concepts.PrimitiveItem.PrimitiveItem(
+				extId /*extId String */,
+				"UpdatePrimitiveItemRule" /*aString String */,
+				true /*aBoolean boolean */,
+				1 /*anInt int */,
+				1L /*aLong long */,
+				1.0 /*aDouble double */,
+				DateTime.now() /*aDateTime DateTime */);
+		}
+		Log.log(logger, "info", "Setup concept %s", pItem@extId);
+	}
+}

@@ -1,0 +1,23 @@
+/**
+ * @description Test BE instanceOf concept with true condition
+ */
+void rulefunction Test.BE_AssertionTest.testTrueInstanceOfConcept {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Concepts.PrimitiveArrayItem paItem = RuleFunctions.CreateObject.createPrimitiveArrayItem(
+			"first" /*aString String */,
+			true /*aBoolean boolean */,
+			1 /*anInt int */,
+			1 /*aLong long */,
+			1.0 /*aDouble double */,
+			DateTime.now() /*aDateTime DateTime */);
+			
+		assertThat("True instance of concept", 
+			paItem, instanceOf("/Concepts/PrimitiveArrayItem"));
+	}
+}

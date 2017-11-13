@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><element:Concept xmlns:element="http:///com/tibco/cep/designtime/core/model/element" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/Concepts/" folder="/Concepts/" name="PrimitiveArrayItem" description="array properties of primitive types" GUID="A518EFBE-DE39-553A-A27A-792F8131451C" ownerProjectName="BETestLib" superConceptPath="" autoStartStateMachine="true">
+  <extendedProperties/>
+  <properties name="strings" ownerProjectName="BETestLib" array="true" ownerPath="/Concepts/PrimitiveArrayItem"/>
+  <properties name="booleans" ownerProjectName="BETestLib" type="boolean" array="true" ownerPath="/Concepts/PrimitiveArrayItem"/>
+  <properties name="ints" ownerProjectName="BETestLib" type="int" array="true" ownerPath="/Concepts/PrimitiveArrayItem"/>
+  <properties name="longs" ownerProjectName="BETestLib" type="long" array="true" ownerPath="/Concepts/PrimitiveArrayItem"/>
+  <properties name="doubles" ownerProjectName="BETestLib" type="double" array="true" ownerPath="/Concepts/PrimitiveArrayItem"/>
+  <properties name="dateTimes" ownerProjectName="BETestLib" type="DateTime" array="true" ownerPath="/Concepts/PrimitiveArrayItem"/>
+</element:Concept>

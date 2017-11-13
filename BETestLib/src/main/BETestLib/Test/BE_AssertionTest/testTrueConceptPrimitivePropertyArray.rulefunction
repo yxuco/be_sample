@@ -1,0 +1,31 @@
+/**
+ * @description Test BE concept of matching primitive property array with true condition
+ */
+void rulefunction Test.BE_AssertionTest.testTrueConceptPrimitivePropertyArray {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Concepts.PrimitiveArrayItem paItem2 = Concepts.PrimitiveArrayItem.PrimitiveArrayItem(
+			null /*extId String */,
+			String[]{"first", "second"} /*strings String[] */,
+			boolean[]{true, false} /*booleans boolean[] */,
+			int[]{1, 2} /*ints int[] */,
+			long[]{1L, 2L} /*longs long[] */,
+			double[]{1.0, 2.0} /*doubles double[] */,
+			DateTime[]{DateTime.now(), DateTime.now()} /*dateTimes DateTime */);
+
+		// at least one of the strings is equal to "first"
+		assertThat("True concept primitive property array", 
+			paItem2, 
+			withProperty("strings", hasItem(equalTo("first"))));
+			
+		// only one of the strings is equal to "first"
+		assertThat("True concept primitive property array", 
+			paItem2, 
+			withProperty("strings", hasSize(equalTo("first"), 1)));
+	}
+}

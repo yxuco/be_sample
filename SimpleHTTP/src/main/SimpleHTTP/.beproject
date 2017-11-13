@@ -7,7 +7,10 @@
     <nativeLibraryLocation/>
   </thirdpartyLibEntries>
   <thirdpartyLibEntries path="JUNIT_HOME/junit.jar" var="true"/>
+  <thirdpartyLibEntries entryType="Third Party" path="/Users/yxu/.m2/repository/com/tibco/psg/bestats/1.0.0/bestats-1.0.0.jar" timestamp="1510473697000">
+    <nativeLibraryLocation/>
+  </thirdpartyLibEntries>
   <javaSourceFolderEntries entryType="JAVA_SOURCE_FOLDER" path="/SimpleHTTP/JavaSrc" readOnly="true"/>
-  <enterpriseArchiveConfiguration name="SimpleHTTP" author="demo" version="104" path="/Users/yxu/Developer/git/be/SimpleHTTP/target/SimpleHTTP-1.0.0.ear" tempOutputPath="/private/tmp" overwrite="true"/>
+  <enterpriseArchiveConfiguration name="SimpleHTTP" author="demo" version="105" path="/Users/yxu/Developer/git/be/SimpleHTTP/target/SimpleHTTP-1.0.0.ear" tempOutputPath="/private/tmp" overwrite="true"/>
   <bpmnProcessSettings/>
 </configuration:StudioProjectConfiguration>

@@ -1,0 +1,19 @@
+/**
+ * @description 
+ */
+void rulefunction Test.SimpleHamcrestTest.testTrueAnyOf {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		assertThat("Simple true anyOf", 
+			"foo bar", 
+			anyOf(
+				startsWithString("foo"),
+				endsWithString("far")));
+		
+	}
+}

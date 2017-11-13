@@ -1,0 +1,18 @@
+/**
+ * @description Create and return a ListItems concept
+ */
+Concepts.ListItems rulefunction RuleFunctions.CreateObject.createListItems {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.PrimitiveArrayItem aPrimitiveArrayItem;
+		Concepts.PrimitiveItem aPrimitiveItem;
+	}
+	body {
+		return Concepts.ListItems.ListItems(
+			null /*extId String */,
+			Concepts.PrimitiveArrayItem[]{aPrimitiveArrayItem} /*primitiveArrayRefs Concepts.PrimitiveArrayItem[] */,
+			Concepts.PrimitiveItem[]{aPrimitiveItem} /*primitiveRefs Concepts.PrimitiveItem[] */);
+	}
+}

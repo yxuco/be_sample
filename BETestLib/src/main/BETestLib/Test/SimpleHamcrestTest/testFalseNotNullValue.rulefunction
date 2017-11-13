@@ -1,0 +1,27 @@
+/**
+ * @description Test Hamcrest not-null value with false condition
+ */
+void rulefunction Test.SimpleHamcrestTest.testFalseNotNullValue {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		String reason = "Simple false not-null value";
+		try {
+			assertThat(reason,
+				null,
+				notNullValue());
+		}
+		catch (Exception e) {
+			if (isValidAssertionError(e, reason)) {
+				return;
+			} else {
+				fail(e@message);
+			}
+		}
+		fail(reason);
+	}
+}

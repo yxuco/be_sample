@@ -1,0 +1,32 @@
+/**
+ * @description Test BE instanceOf primitive types with true condition
+ */
+void rulefunction Test.BE_AssertionTest.testTrueInstanceOfPrimitive {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Concepts.PrimitiveItem pItem = RuleFunctions.CreateObject.createPrimitiveItem(
+			"first" /*aString String */,
+			true /*aBoolean boolean */,
+			1 /*anInt int */,
+			1 /*aLong long */,
+			1.0 /*aDouble double */,
+			DateTime.now() /*aDateTime DateTime */);
+		assertThat("True instance of string",
+			pItem.aString, instanceOf("String"));
+		assertThat("True instance of boolean",
+			pItem.aBoolean, instanceOf("boolean"));
+		assertThat("True instance of int",
+			pItem.anInt, instanceOf("int"));
+		assertThat("True instance of long",
+			pItem.aLong, instanceOf("long"));
+		assertThat("True instance of double",
+			pItem.aDouble, instanceOf("double"));
+		assertThat("True instance of DateTime",
+			pItem.aDateTime, instanceOf("DateTime"));
+	}
+}

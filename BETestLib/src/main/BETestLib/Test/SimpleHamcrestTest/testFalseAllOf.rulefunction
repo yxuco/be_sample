@@ -1,0 +1,29 @@
+/**
+ * @description Test Hamcrest allOf with false condition
+ */
+void rulefunction Test.SimpleHamcrestTest.testFalseAllOf {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		String reason = "Simple false allOf";
+		try {
+			assertThat(reason, 
+				"foo bar", 
+				allOf(
+					startsWithString("foo"),
+					endsWithString("foo")));
+		}
+		catch (Exception e) {
+			if (isValidAssertionError(e, reason)) {
+				return;
+			} else {
+				fail(e@message);
+			}
+		}
+		fail(reason);
+	}
+}

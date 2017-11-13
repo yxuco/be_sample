@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/testservice/TestScheduler/" folder="/testservice/TestScheduler/" name="PreprocTestTrigger" description="Trigger event to start a test in preprocessor context" GUID="20044947-F32D-DCDB-25E6-BCEEE5FBA444" ownerProjectName="BETestLib" superEventPath="" ttlUnits="Seconds" channelURI="/testservice/TestScheduler/scheduledTest" destinationName="preprocTest">
+  <properties name="functionName" ownerProjectName="BETestLib" conceptTypePath="/testservice/TestScheduler/PreprocTestTrigger" ownerPath="/testservice/TestScheduler/PreprocTestTrigger"/>
+  <expiryAction folder="/testservice/TestScheduler/PreprocTestTrigger" name="RuleTestTrigger_expiryAction" ownerProjectName="BETestLib" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="ruletesttrigger" type="/testservice/TestScheduler/PreprocTestTrigger"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

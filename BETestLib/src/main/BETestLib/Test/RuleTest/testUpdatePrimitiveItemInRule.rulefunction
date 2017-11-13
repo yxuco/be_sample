@@ -1,0 +1,66 @@
+/**
+ * @description Trigger the UpdatePrimitiveItem rule, and verify that a concept is updated by an event.
+ * 
+ *        Note: this test must be executed in a rule, and thus it updates an existing concept from cache.
+ *              It assumes that the concept is already created by the preproc test for the same rule.
+ *              This test is an isolated rule test because it invokes only a single rule.
+ * @author Yueming Xu
+ */
+void rulefunction Test.RuleTest.testUpdatePrimitiveItemInRule {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Object logger = Log.getLogger("Test.RuleTest.testUpdatePrimitiveItemInRule");
+		Log.log(logger, "info", "Start test Rules.UpdatePrimitiveItem");
+		
+		// For cache-only OM, reload object into working memory for new rule session
+		// Note: newly created object here cannot be matched by invokeRule() below,
+		//       so, the matching object must have been created during test setup.
+		String extId = "PI:UpdatePrimitiveItemRule";
+		Cluster.DataGrid.CacheLoadConceptByExtId(extId, true);
+
+		// create event to trigger the rule
+		Events.PrimitiveEvent evt = Events.PrimitiveEvent.PrimitiveEvent(
+			null /*extId String */,
+			null /*payload String */,
+			"UpdatePrimitiveItemRule" /*aString String */,
+			false /*aBoolean boolean */,
+			20 /*anInt int */,
+			20L /*aLong long */,
+			20.0 /*aDouble double */,
+			DateTime.now() /*aDateTime DateTime */);
+		
+		// test one rule in isolation.  Note that this function has limitations.
+		// -- it accepts only one argument, which must be the first scope variable of the rule.
+		// -- this call will execute the rule action, and return array of matching scope tuples.
+		Object[] result = Engine.invokeRule(
+			"/Rules/UpdatePrimitiveItem",
+			Object[]{evt},
+			true /*enable dirty read */);
+			
+		// verify the returned results
+		Log.log(logger, "info", "Rule returned %d matching tuples", result@length);
+		for (int i = 0; i < result@length; i++) {
+			Object[] objs = result[i];
+			assertThat("Rule matched tuple must not be null",
+				objs, notNullValue());
+			assertThat("Rule matched tuple must contain 2 objects",
+				objs@length, equalTo(2));
+			assertThat("2nd object in rule matched tuple must be a Concepts.PrimitiveItem",
+				objs[1], instanceOf("/Concepts/PrimitiveItem"));
+			
+			Concepts.PrimitiveItem uItem = objs[1];
+			String fmt = "{%s, %s, %d, %d, %.1f, %tc}";
+			String itemStr = String.format(fmt, uItem.aString, uItem.aBoolean, uItem.anInt, uItem.aLong, uItem.aDouble, uItem.aDateTime);
+			String evtStr = String.format(fmt, evt.aString, evt.aBoolean, evt.anInt, evt.aLong, evt.aDouble, evt.aDateTime);
+
+			assertThat(String.format("Concept %s must be updated to value of input event %s", itemStr, evtStr),
+				itemStr, equalTo(evtStr));
+		}
+		Log.log(logger, "info", "Completed test Rules.UpdatePrimitiveItem");
+	}
+}

@@ -1,0 +1,16 @@
+/**
+ * @description Test Hamcrest not for Matcher with true condition
+ */
+void rulefunction Test.SimpleHamcrestTest.testTrueNotMatcher {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		assertThat("Simple true not Matcher",
+			asList("abc", "xyz"),
+			not(everyItem(startsWithString("a"))));
+	}
+}

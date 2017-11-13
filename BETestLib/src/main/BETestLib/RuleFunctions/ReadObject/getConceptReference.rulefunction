@@ -1,0 +1,14 @@
+/**
+ * @description Return concept reference property of a SingleItems concept
+ */
+Concepts.PrimitiveItem rulefunction RuleFunctions.ReadObject.getConceptReference {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.SingleItems aSingleItems;
+	}
+	body {
+		return aSingleItems.primitiveRef;
+	}
+}

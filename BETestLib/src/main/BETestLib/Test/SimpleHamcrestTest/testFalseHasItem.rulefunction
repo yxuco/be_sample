@@ -1,0 +1,27 @@
+/**
+ * @description Test Hamcrest hasItem with false condition
+ */
+void rulefunction Test.SimpleHamcrestTest.testFalseHasItem {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		String reason = "Simple false hasItem";
+		try {
+			assertThat(reason,
+				asList("abc", "xyz"),
+				hasItem(startsWithString("b")));
+		}
+		catch (Exception e) {
+			if (isValidAssertionError(e, reason)) {
+				return;
+			} else {
+				fail(e@message);
+			}
+		}
+		fail(reason);
+	}
+}

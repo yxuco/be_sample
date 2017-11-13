@@ -1,0 +1,19 @@
+/**
+ * @description Add objects to a ListItems, and return the updated ListItems concept.
+ */
+Concepts.ListItems rulefunction RuleFunctions.UpdateObject.addConceptToListItems {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.ListItems aListItems;
+		Concepts.PrimitiveArrayItem aPrimitiveArrayItem;
+		Concepts.PrimitiveItem aPrimitiveItem;
+	}
+	body {
+		aListItems.primitiveArrayRefs[aListItems.primitiveArrayRefs@length] = aPrimitiveArrayItem;
+		aListItems.primitiveRefs[aListItems.primitiveRefs@length] = aPrimitiveItem;
+		
+		return aListItems;
+	}
+}

@@ -1,0 +1,18 @@
+/**
+ * @description Create and return a Container concept
+ */
+Concepts.Container rulefunction RuleFunctions.CreateObject.createContainer {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.SingleItems aSingleItems;
+		Concepts.ListItems aListItems;
+	}
+	body {
+		return Concepts.Container.Container(
+			null /*extId String */,
+			Concepts.SingleItems[]{aSingleItems} /*arrayContained Concepts.SingleItems[] */,
+			aListItems /*containedArray Concepts.ListItems */);
+	}
+}

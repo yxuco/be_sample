@@ -1,0 +1,26 @@
+/**
+ * @description Create and return a PrimitiveArrayItem concept
+ */
+Concepts.PrimitiveArrayItem rulefunction RuleFunctions.CreateObject.createPrimitiveArrayItem {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		String aString;
+		boolean aBoolean;
+		int anInt;
+		long aLong;
+		double aDouble;
+		DateTime aDateTime;		
+	}
+	body {
+		return Concepts.PrimitiveArrayItem.PrimitiveArrayItem(
+			null /*extId String */,
+			String[]{aString} /*strings String[] */,
+			boolean[]{aBoolean} /*booleans boolean[] */,
+			int[]{anInt} /*ints int[] */,
+			long[]{aLong} /*longs long[] */,
+			double[]{aDouble} /*doubles double[] */,
+			DateTime[]{aDateTime} /*dateTimes DateTime[] */);
+	}
+}

@@ -1,0 +1,14 @@
+/**
+ * @description Return a contained concept from Container
+ */
+Concepts.ListItems rulefunction RuleFunctions.ReadObject.getContainedConcept {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.Container container;
+	}
+	body {
+		return container.containedArray;
+	}
+}

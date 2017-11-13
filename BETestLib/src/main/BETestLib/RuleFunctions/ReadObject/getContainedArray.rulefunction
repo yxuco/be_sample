@@ -1,0 +1,14 @@
+/**
+ * @description Return array of contained concepts
+ */
+Concepts.SingleItems[] rulefunction RuleFunctions.ReadObject.getContainedArray {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.Container container;
+	}
+	body {
+		return Instance.PropertyArray.toArrayConcept(container.arrayContained);
+	}
+}

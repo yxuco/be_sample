@@ -1,0 +1,34 @@
+/**
+ * @description Test BE instanceOf concept with false condition
+ */
+void rulefunction Test.BE_AssertionTest.testFalseInstanceOfConcept {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Concepts.PrimitiveItem pItem = RuleFunctions.CreateObject.createPrimitiveItem(
+			"first" /*aString String */,
+			true /*aBoolean boolean */,
+			1 /*anInt int */,
+			1 /*aLong long */,
+			1.0 /*aDouble double */,
+			DateTime.now() /*aDateTime DateTime */);
+		
+		String reason = "False instance of concept";
+		try {
+			assertThat(reason,
+				pItem, instanceOf("/Concepts/PrimitiveArrayItem"));
+		}
+		catch (Exception e) {
+			if (isValidAssertionError(e, reason)) {
+				return;
+			} else {
+				fail(e@message);
+			}
+		}
+		fail(reason);
+	}
+}

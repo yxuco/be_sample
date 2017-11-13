@@ -1,0 +1,16 @@
+/**
+ * @description Test for string regex match with true condition
+ */
+void rulefunction Test.SimpleHamcrestTest.testTrueRegexMatch {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		assertThat("Simple true string regex match",
+			"foo bar",
+			matchesRegex("^foo.*"));
+	}
+}

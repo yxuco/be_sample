@@ -1,0 +1,43 @@
+/**
+ * @description Test the function addDataToPrimitiveArray, verify updated properties.
+ * 
+ *        Note: In preprocessor context, it is not allowed to update existing concepts from other rule session.
+ *              However, in this test case, all objects are newly created by the function,
+ *              So, this test should work in either preprocessor, or rule context.
+ * @author Yueming Xu
+ */
+void rulefunction Test.UpdateObjectTest.testAddDataToPrimitiveArray {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Object logger = Log.getLogger("Test.UpdateObjectTest.testAddDataToPrimitiveArray");
+		Log.log(logger, "info", "Start test RuleFunctions.UpdateObject.addDataToPrimitiveArray");
+
+		Concepts.PrimitiveArrayItem paItem = RuleFunctions.CreateObject.createPrimitiveArrayItem(
+			"first" /*aString String */,
+			true /*aBoolean boolean */,
+			1 /*anInt int */,
+			1 /*aLong long */,
+			1.0 /*aDouble double */,
+			DateTime.now() /*aDateTime DateTime */);
+		RuleFunctions.UpdateObject.addDataToPrimitiveArray(
+			paItem /*aPrimitiveArray Concepts.PrimitiveArrayItem */,
+			"second" /*aString String */,
+			true /*aBoolean boolean */,
+			2 /*anInt int */,
+			2L /*aLong long */,
+			2.0 /*aDouble double */,
+			DateTime.now() /*aDateTime DateTime */);
+
+		assertThat("String property length should be 2",
+			paItem,
+			withProperty("strings", hasSize(notNullValue(), 2)));
+		assertThat("The 2nd item of long property should be 2L",
+			Instance.PropertyArray.toArrayLong(paItem.longs)[1],
+			equalTo(2L));
+	}
+}

@@ -1,0 +1,28 @@
+/**
+ * @description Test Hamcrest null value with true condition
+ */
+void rulefunction Test.SimpleHamcrestTest.testFalseNullValue {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		String reason = "Simple false null value";
+		try {
+			DateTime d1 = DateTime.parseString("2015-06-01 12:00:00", "yyyy-MM-dd HH:mm:ss");
+			assertThat(reason,
+				d1,
+				nullValue());
+		}
+		catch (Exception e) {
+			if (isValidAssertionError(e, reason)) {
+				return;
+			} else {
+				fail(e@message);
+			}
+		}
+		fail(reason);
+	}
+}

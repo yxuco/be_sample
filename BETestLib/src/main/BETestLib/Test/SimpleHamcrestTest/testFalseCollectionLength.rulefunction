@@ -1,0 +1,28 @@
+/**
+ * @description Test collection length with false condition
+ */
+void rulefunction Test.SimpleHamcrestTest.testFalseCollectionLength {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		String reason = "Simple false collection length";
+		try {
+			assertThat(reason, 
+				asList("bar", "cat"), 
+				hasSize(startsWithString("ba"), 2));
+		}
+		catch (Exception e) {
+			if (isValidAssertionError(e, reason)) {
+				return;
+			} else {
+				fail(e@message);
+			}
+		}
+		fail(reason);
+		
+	}
+}

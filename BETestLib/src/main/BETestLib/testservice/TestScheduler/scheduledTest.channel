@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel:Channel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:channel="http:///com/tibco/cep/designtime/core/model/service/channel" xmlns:designtime="http:///com/tibco/cep/designtime/core/model/designtime_ontology.ecore" namespace="/testservice/TestScheduler/" folder="/testservice/TestScheduler/" name="scheduledTest" description="" GUID="CAACEF35-5246-EEDE-1243-AC4ACF21D0E9" ownerProjectName="BETestLib">
+  <driver configMethod="REFERENCE" label="LOCAL" channel="/">
+    <destinations folder="/UnitTest/RuleTest/ScheduleRuleTest/TestTriggerChannel/" name="preprocTest" description="" GUID="8461398C-18B1-A4CA-1DC4-C70AB8F3A930" ownerProjectName="BETestLib" driverConfig="//@driver">
+      <properties>
+        <properties xsi:type="designtime:SimpleProperty" name="Size" value="0"/>
+        <properties xsi:type="designtime:SimpleProperty" name="TimeOut" value="-1"/>
+      </properties>
+    </destinations>
+    <driverType xsi:type="channel:DriverTypeInfo" driverTypeName="Local"/>
+  </driver>
+</channel:Channel>

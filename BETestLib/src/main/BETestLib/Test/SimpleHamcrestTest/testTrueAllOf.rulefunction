@@ -1,0 +1,18 @@
+/**
+ * @description Test Hamcrest allOf with true condition
+ */
+void rulefunction Test.SimpleHamcrestTest.testTrueAllOf {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		assertThat("Simple true allOf", 
+			"foo bar", 
+			allOf(
+				startsWithString("foo"),
+				endsWithString("bar")));
+	}
+}

@@ -1,0 +1,54 @@
+/**
+ * @description Test BE concept of matching concept reference property array with true condition
+ */
+void rulefunction Test.BE_AssertionTest.testTrueConceptReferencePropertyArray {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Concepts.PrimitiveItem pItem = RuleFunctions.CreateObject.createPrimitiveItem(
+			"first" /*aString String */,
+			true /*aBoolean boolean */,
+			1 /*anInt int */,
+			1 /*aLong long */,
+			1.0 /*aDouble double */,
+			DateTime.now() /*aDateTime DateTime */);
+		Concepts.PrimitiveItem pItem2 = RuleFunctions.CreateObject.createPrimitiveItem(
+			"second" /*aString String */,
+			false /*aBoolean boolean */,
+			2 /*anInt int */,
+			3 /*aLong long */,
+			2.0 /*aDouble double */,
+			DateTime.now() /*aDateTime DateTime */);
+		Concepts.PrimitiveArrayItem paItem = RuleFunctions.CreateObject.createPrimitiveArrayItem(
+			"first" /*aString String */,
+			true /*aBoolean boolean */,
+			1 /*anInt int */,
+			1 /*aLong long */,
+			1.0 /*aDouble double */,
+			DateTime.now() /*aDateTime DateTime */);
+		Concepts.PrimitiveArrayItem paItem2 = Concepts.PrimitiveArrayItem.PrimitiveArrayItem(
+			null /*extId String */,
+			String[]{"first", "second"} /*strings String[] */,
+			boolean[]{true, false} /*booleans boolean[] */,
+			int[]{1, 2} /*ints int[] */,
+			long[]{1L, 2L} /*longs long[] */,
+			double[]{1.0, 2.0} /*doubles double[] */,
+			DateTime[]{DateTime.now(), DateTime.now()} /*dateTimes DateTime */);
+		Concepts.ListItems lItem = Concepts.ListItems.ListItems(
+			null /*extId String */,
+			PrimitiveArrayItem[]{paItem, paItem2} /*primitiveArrayRefs Concepts.PrimitiveArrayItem[] */,
+			PrimitiveItem[]{pItem, pItem2} /*primitiveRefs Concepts.PrimitiveItem[] */);
+			
+		// In array of concept references, at least one contains a string "second"
+		assertThat("True concept reference property array",
+			lItem,
+			withProperty(
+				"primitiveRefs",
+				hasItem(
+					withProperty("aString", equalTo("second")))));
+	}
+}

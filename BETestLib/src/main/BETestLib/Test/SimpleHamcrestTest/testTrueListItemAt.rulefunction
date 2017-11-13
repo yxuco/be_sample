@@ -1,0 +1,24 @@
+/**
+ * @description Test list item at a index with true condition
+ */
+void rulefunction Test.SimpleHamcrestTest.testTrueListItemAt {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		assertThat("Simple true list item at index", 
+			asList("bar", "cat"), 
+			itemAt(0, startsWithString("ba")));
+	
+		Object list = Collections.List.createArrayList();
+		Collections.add(list, "bar");
+		Collections.add(list, "cat");
+
+		assertThat("Simple true list item at index", 
+			list, 
+			itemAt(0, startsWithString("ba")));
+	}
+}

@@ -1,0 +1,20 @@
+/**
+ * @description Test keyed value in a map with true condition
+ */
+void rulefunction Test.SimpleHamcrestTest.testTrueMapItemForKey {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Object map = Collections.Map.createHashMap();
+		Collections.Map.put(map, "one", "uno");
+		Collections.Map.put(map, "two", "due");
+		Collections.Map.put(map, "three", "tre");
+		assertThat("Simple true map item for key", 
+			map, 
+			itemForKey("two", startsWithString("du")));
+	}
+}

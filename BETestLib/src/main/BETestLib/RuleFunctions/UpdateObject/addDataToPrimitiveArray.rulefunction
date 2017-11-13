@@ -1,0 +1,27 @@
+/**
+ * @description Add attributes to a PrimitiveArrayItem concept, and return the updated PrimitiveArrayItem.
+ */
+Concepts.PrimitiveArrayItem rulefunction RuleFunctions.UpdateObject.addDataToPrimitiveArray {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.PrimitiveArrayItem aPrimitiveArray;
+		String aString;
+		boolean aBoolean;
+		int anInt;
+		long aLong;
+		double aDouble;
+		DateTime aDateTime;
+	}
+	body {
+		aPrimitiveArray.strings[aPrimitiveArray.strings@length] = aString;
+		aPrimitiveArray.booleans[aPrimitiveArray.booleans@length] = aBoolean;
+		aPrimitiveArray.ints[aPrimitiveArray.ints@length] = anInt;
+		aPrimitiveArray.longs[aPrimitiveArray.longs@length] = aLong;
+		aPrimitiveArray.doubles[aPrimitiveArray.doubles@length] = aDouble;
+		aPrimitiveArray.dateTimes[aPrimitiveArray.dateTimes@length] = aDateTime;
+		
+		return aPrimitiveArray;
+	}
+}

@@ -1,0 +1,55 @@
+/**
+ * @description Trigger the UpdatePrimitiveItem rule, and verify that a concept is updated by an event.
+ * 
+ *        Note: this function executes all rules by creating triggering concpt and events,
+ *              so it is not absolutely an isolated test. However, it is usually possible to
+ *              use special data of the trigger objects to reduce the chance of firing other rules.
+ *              This test uses catelog functions that runs ONLY in preprocessor context.
+ * @author Yueming Xu
+ */
+void rulefunction Test.RuleTest.testUpdatePrimitiveItemInPreproc {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Object logger = Log.getLogger("Test.RuleTest.testUpdatePrimitiveItemInPreproc");
+		Log.log(logger, "info", "Start test Rules.UpdatePrimitiveItem");
+		
+		// For cache-only OM, reload object into working memory for new rule session
+		String extId = "PI:UpdatePrimitiveItemRule";
+		Concepts.PrimitiveItem pItem = Cluster.DataGrid.CacheLoadConceptByExtId(extId, true);
+		
+		// create event to trigger the rule
+		Events.PrimitiveEvent evt = Events.PrimitiveEvent.PrimitiveEvent(
+			null /*extId String */,
+			null /*payload String */,
+			"UpdatePrimitiveItemRule" /*aString String */,
+			false /*aBoolean boolean */,
+			10 /*anInt int */,
+			10L /*aLong long */,
+			10.0 /*aDouble double */,
+			DateTime.now() /*aDateTime DateTime */);
+			
+		// assert event, and execute rules (need to manually execute rule before the following data verification)
+		Event.assertEvent(evt);
+		Engine.executeRules();
+		
+		// fetch the updated value of the concept from cache
+		pItem = Cluster.DataGrid.CacheLoadConceptByExtId(extId, true);
+		Log.log(logger, "info", "Cache re-load returned: %s", pItem);
+		
+		// verify the updated concept
+		Log.log(logger, "info", "Verify updated PrimitiveItem");
+		String fmt = "{%s, %s, %d, %d, %.1f, %tc}";
+		String itemStr = String.format(fmt, pItem.aString, pItem.aBoolean, pItem.anInt, pItem.aLong, pItem.aDouble, pItem.aDateTime);
+		String evtStr = String.format(fmt, evt.aString, evt.aBoolean, evt.anInt, evt.aLong, evt.aDouble, evt.aDateTime);
+
+		assertThat(String.format("Concept %s must be updated to expected value %s", itemStr, evtStr),
+			itemStr, equalTo(evtStr));
+
+		Log.log(logger, "info", "Completed test Rules.UpdatePrimitiveItem");
+	}
+}

@@ -1,0 +1,18 @@
+/**
+ * @description The worker action wrapper for a rule test. Wrapper is required because it must return boolean.
+ *              Rule tests cannot use preprocessor context when this approach is used.
+ * @author Yueming Xu
+ */
+boolean rulefunction Test.RuleTest.RuleTestWorker.ruleTestAction {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+	}
+	body {
+		Object logger = Log.getLogger("Test.RuleTest.RuleTestWorker.ruleTestAction");
+		Log.log(logger, "info", "Invoke test of rule UpdatePrimitiveItem");
+		Test.RuleTest.testUpdatePrimitiveItemInRule();
+		return false;
+	}
+}

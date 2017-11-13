@@ -1,0 +1,16 @@
+/**
+ * @description Test Hamcrest hasItem with true condition
+ */
+void rulefunction Test.SimpleHamcrestTest.testTrueHasItem {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		assertThat("Simple true hasItem",
+			asList("abc", "xyz"),
+			hasItem(startsWithString("a")));
+	}
+}

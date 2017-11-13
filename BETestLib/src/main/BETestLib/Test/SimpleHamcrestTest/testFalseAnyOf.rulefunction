@@ -1,0 +1,30 @@
+/**
+ * @description Test Hamcrest anyOf with false condition
+ */
+void rulefunction Test.SimpleHamcrestTest.testFalseAnyOf {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		String reason = "Simple false anyOf";
+		try {
+			assertThat(reason, 
+				"foo bar", 
+				anyOf(
+					startsWithString("far"),
+					endsWithString("far")));
+		}
+		catch (Exception e) {
+			if (isValidAssertionError(e, reason)) {
+				return;
+			} else {
+				fail(e@message);
+			}
+		}
+		fail(reason);
+		
+	}
+}

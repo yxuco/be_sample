@@ -1,0 +1,30 @@
+/**
+ * @description execute all SimpleHamcrest test; used for testing at engine start.
+ */
+void rulefunction Test.SimpleHamcrestTest.allHamcrestTests {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Object logger = Log.getLogger("Test.SimpleHamcrestTest.allHamcrestTests");
+		Log.log(logger, "info", "Start all Hamcrest Tests");
+		String[] tests = String[]{
+			"testTrueAllOf", "testFalseAllOf",
+			"testTrueAnyOf", "testFalseAnyOf",
+			"testTrueHasItem", "testFalseHasItem",
+			"testTrueEveryItem", "testFalseEveryItem",
+			"testTrueNotMatcher", "testFalseNotMatcher",
+			"testTrueNotValue", "testFalseNotValue",
+			"testTrueNullValue", "testFalseNullValue",
+			"testTrueNotNullValue", "testFalseNotNullValue",
+			"testTrueRegexMatch", "testFalseRegexMatch",
+			"testTrueCollectionLength", "testFalseCollectionLength"};
+		for (int i = 0; i < tests@length; i++) {
+			Engine.invokeRuleFunction("/Test/SimpleHamcrestTest/" + tests[i], null);
+			Log.log(logger, "info", "%s completed", tests[i]);
+		}
+	}
+}

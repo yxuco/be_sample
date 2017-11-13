@@ -1,0 +1,16 @@
+/**
+ * @description Test collection length with true condition
+ */
+void rulefunction Test.SimpleHamcrestTest.testTrueCollectionLength {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		assertThat("Simple true collection length", 
+			asList("bar", "cat"), 
+			hasSize(startsWithString("ba"), 1));
+	}
+}

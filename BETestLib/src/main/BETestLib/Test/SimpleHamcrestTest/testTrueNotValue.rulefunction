@@ -1,0 +1,18 @@
+/**
+ * @description Test Hamcrest not for value with true condition
+ */
+void rulefunction Test.SimpleHamcrestTest.testTrueNotValue {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		int one = 1;
+		int two = 2;
+		assertThat("Simple true not value",
+			one,
+			not(two));
+	}
+}

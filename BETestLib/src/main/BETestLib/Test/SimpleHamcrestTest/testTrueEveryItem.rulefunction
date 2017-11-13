@@ -1,0 +1,16 @@
+/**
+ * @description Test Hamcrest everyItem with true condition
+ */
+void rulefunction Test.SimpleHamcrestTest.testTrueEveryItem {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		assertThat("Simple true everyItem",
+			asList("abc", "ayz"),
+			everyItem(startsWithString("a")));
+	}
+}

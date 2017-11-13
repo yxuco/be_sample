@@ -1,0 +1,28 @@
+/**
+ * @description Schedule a test that cannot run during engine startup.
+ *        Note: Cluster.scheduleEvent() cannot be used during engine startup, so a timer is used instead.
+ * @author Yueming Xu
+ */
+void rulefunction testservice.TestScheduler.scheduleTest {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		String functionName;
+		boolean isPreproc;
+		long delay;
+	}
+	body {
+		String prefix = "rule:";
+		if (isPreproc) {
+			prefix = "preproc:";
+		}
+		
+		Object logger = Log.getLogger("testservice.TestScheduler.scheduleTest");
+		Log.log(logger, "info", "schedule trigger event to test %s after %d ms delay", functionName, delay);
+		testservice.TestScheduler.TestTimer.scheduleTestTimer(
+			delay /*delay long */,
+			prefix + functionName /*closure String */,
+			0 /*ttl long */);
+	}
+}

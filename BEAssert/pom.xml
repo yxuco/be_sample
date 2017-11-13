@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <!-- gets common definitions from ../CommonPOM/pom.xml -->
+  <parent>
+    <groupId>com.tibco.psg</groupId>
+    <artifactId>CommonPOM</artifactId>
+    <version>1.0.0</version>
+    <relativePath>../CommonPOM/pom.xml</relativePath>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>beassert</artifactId>
+  <packaging>jar</packaging>
+
+  <dependencies>
+    <!-- BE jars used to implement catalog functions -->
+    <dependency>
+      <groupId>com.tibco.be</groupId>
+      <artifactId>cep-common</artifactId>
+      <version>${tibco.be.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.tibco.be</groupId>
+      <artifactId>cep-kernel</artifactId>
+      <version>${tibco.be.version}</version>
+    </dependency>
+
+    <!-- unit test plugins -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-core</artifactId>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>

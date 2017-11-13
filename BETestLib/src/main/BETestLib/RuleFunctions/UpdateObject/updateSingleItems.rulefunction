@@ -1,0 +1,19 @@
+/**
+ * @description Update properties of a SingleItems, and return the updated SingleItems concept
+ */
+Concepts.SingleItems rulefunction RuleFunctions.UpdateObject.updateSingleItems {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.SingleItems aSingleItems;
+		Concepts.PrimitiveArrayItem aPrimitiveArrayItem;
+		Concepts.PrimitiveItem aPrimitiveItem;
+	}
+	body {
+		aSingleItems.primitiveArrayRef = aPrimitiveArrayItem;
+		aSingleItems.primitiveRef = aPrimitiveItem;
+		
+		return aSingleItems;
+	}
+}

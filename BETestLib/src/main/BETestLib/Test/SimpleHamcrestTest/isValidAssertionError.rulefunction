@@ -1,0 +1,23 @@
+/**
+ * @description return true if exception is AssertionError, and the error message contains the specified reason
+ */
+boolean rulefunction Test.SimpleHamcrestTest.isValidAssertionError {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Exception e;
+		String reason;
+	}
+	body {
+		Object logger = Log.getLogger("Test.SimpleHamcrestTest.isValidAssertionError");
+		Log.log(logger, "debug", "check %s", e@message);
+		if (e@errorType != "java.lang.AssertionError") {
+			return false;
+		}
+		else if (reason != null) {
+			return String.contains(e@message, reason);
+		}
+		return true;
+	}
+}

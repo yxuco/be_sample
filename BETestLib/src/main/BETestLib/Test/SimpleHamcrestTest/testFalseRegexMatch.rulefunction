@@ -1,0 +1,27 @@
+/**
+ * @description Test for string regex match with false condition
+ */
+void rulefunction Test.SimpleHamcrestTest.testFalseRegexMatch {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		String reason = "Simple false string regex match";
+		try {
+			assertThat(reason,
+				"foo bar",
+				matchesRegex("^foo$"));
+		}
+		catch (Exception e) {
+			if (isValidAssertionError(e, reason)) {
+				return;
+			} else {
+				fail(e@message);
+			}
+		}
+		fail(reason);
+	}
+}

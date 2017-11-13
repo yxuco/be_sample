@@ -1,0 +1,28 @@
+/**
+ * @description invoke specified test function in preprocessor context.
+ *              Configure it as the preprocessor for the PreprocTestTrigger event
+ * @author Yueming Xu
+ */
+void rulefunction testservice.TestScheduler.processPreprocTestTrigger {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		testservice.TestScheduler.PreprocTestTrigger trigger;
+	}
+	body {
+        Object logger = Log.getLogger("testservice.TestScheduler.processPreprocTestTrigger");
+        String[] fs = String[]{trigger.functionName};
+        if (String.contains(trigger.functionName, ";")) {
+            fs = String.split(trigger.functionName, ";");
+        }
+        for (int i = 0; i < fs@length; i++) {
+            String fi = String.trim(fs[i]);
+            if (String.length(fi) > 0) {
+                Log.log(logger, "info", "Invoking test %s in preprocessor context", fi);
+                testservice.TestScheduler.printTestResult(fi,
+                	testservice.RuleFunctions.invokeTest(fi));
+            }
+        }
+    }
+}

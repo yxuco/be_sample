@@ -1,0 +1,27 @@
+/**
+ * @description Test Hamcrest everyItem with false condition
+ */
+void rulefunction Test.SimpleHamcrestTest.testFalseEveryItem {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		String reason = "Simple false everyItem";
+		try {
+			assertThat(reason,
+				asList("abc", "xyz"),
+				everyItem(startsWithString("a")));
+		}
+		catch (Exception e) {
+			if (isValidAssertionError(e, reason)) {
+				return;
+			} else {
+				fail(e@message);
+			}
+		}
+		fail(reason);
+	}
+}

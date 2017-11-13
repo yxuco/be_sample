@@ -1,0 +1,14 @@
+/**
+ * @description Return array of concept references property of a ListItems
+ */
+Concepts.PrimitiveItem[] rulefunction RuleFunctions.ReadObject.getReferenceArray {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.ListItems aListItems;
+	}
+	body {
+		return Instance.PropertyArray.toArrayConcept(aListItems.primitiveRefs);
+	}
+}

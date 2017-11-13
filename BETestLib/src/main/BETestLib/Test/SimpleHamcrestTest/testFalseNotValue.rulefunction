@@ -1,0 +1,29 @@
+/**
+ * @description Test Hamcrest not for value with false condition
+ */
+void rulefunction Test.SimpleHamcrestTest.testFalseNotValue {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		String reason = "Simple false not value";
+		try {
+			DateTime d1 = DateTime.parseString("2015-06-01 12:00:00", "yyyy-MM-dd HH:mm:ss");
+			DateTime d2 = DateTime.parseString("2015-06-01 12:00:00", "yyyy-MM-dd HH:mm:ss");
+			assertThat(reason,
+				d1,
+				not(d2));
+		}
+		catch (Exception e) {
+			if (isValidAssertionError(e, reason)) {
+				return;
+			} else {
+				fail(e@message);
+			}
+		}
+		fail(reason);
+	}
+}

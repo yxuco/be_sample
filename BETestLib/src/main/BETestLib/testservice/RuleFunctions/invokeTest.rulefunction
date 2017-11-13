@@ -1,0 +1,27 @@
+/**
+ * @description 
+ */
+String rulefunction testservice.RuleFunctions.invokeTest {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		String testName;
+	}
+	body {
+		try {
+			Engine.invokeRuleFunction(testName, null);
+			return "true";
+		}
+		catch (Exception e) {
+			String errMsg;
+			if ("java.lang.AssertionError" == e@errorType) {
+				errMsg = String.substringAfter(e@message, "AssertionError: ");
+			} else {
+				errMsg = String.format("Exception: %s; StackTrace: %s", e@message, e@stackTrace);
+			}
+			return errMsg;
+		}
+		
+	}
+}

@@ -1,0 +1,20 @@
+/**
+ * @description print results of tests started or scheduled at engine startup
+ */
+void rulefunction testservice.TestScheduler.printTestResult {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		String testName;
+		String testResult;
+	}
+	body {
+        Object logger = Log.getLogger("StartupTest");
+        String msg = " PASSED";
+        if ("true" != testResult) {
+        	msg = " FAILED: " + testResult;
+        }
+		Log.log(logger, "info", testName + msg);
+	}
+}

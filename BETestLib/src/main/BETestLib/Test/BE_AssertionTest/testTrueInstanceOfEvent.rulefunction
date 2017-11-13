@@ -1,0 +1,25 @@
+/**
+ * @description Test BE instanceOf event with true condition
+ */
+void rulefunction Test.BE_AssertionTest.testTrueInstanceOfEvent {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		Events.PrimitiveEvent evt = Events.PrimitiveEvent.PrimitiveEvent(
+			null /*extId String */,
+			null /*payload String */,
+			"first" /*aString String */,
+			true /*aBoolean boolean */,
+			1 /*anInt int */,
+			1L /*aLong long */,
+			1.0 /*aDouble double */,
+			DateTime.now() /*aDateTime DateTime */);
+			
+		assertThat("True instance of event", 
+			evt, instanceOf("/Events/PrimitiveEvent"));
+	}
+}

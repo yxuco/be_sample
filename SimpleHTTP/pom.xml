@@ -5,9 +5,9 @@
   <!-- gets common task definitions from BEParent pom -->
   <parent>
     <groupId>com.tibco.psg.be</groupId>
-    <artifactId>BEParent</artifactId>
+    <artifactId>BECommon</artifactId>
     <version>1.0.0</version>
-    <relativePath>../BEParent/pom.xml</relativePath>
+    <relativePath>../CommonPOM/be_pom.xml</relativePath>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>

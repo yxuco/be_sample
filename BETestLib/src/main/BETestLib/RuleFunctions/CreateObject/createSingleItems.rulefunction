@@ -1,0 +1,18 @@
+/**
+ * @description Create and return a SingleItems concept
+ */
+Concepts.SingleItems rulefunction RuleFunctions.CreateObject.createSingleItems {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.PrimitiveArrayItem aPrimitiveArrayItem;
+		Concepts.PrimitiveItem aPrimitiveItem;
+	}
+	body {
+		return Concepts.SingleItems.SingleItems(
+			null /*extId String */,
+			aPrimitiveArrayItem /*primitiveArrayRef Concepts.PrimitiveArrayItem */,
+			aPrimitiveItem /*primitiveRef Concepts.PrimitiveItem */);
+	}
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><event:SimpleEvent xmlns:event="http:///com/tibco/cep/designtime/core/model/event" xmlns:xmi="http://www.omg.org/XMI" xmi:version="2.0" namespace="/testservice/Events/" folder="/testservice/Events/" name="TestRequest" description="Automated test can use this event to send HTTP GET request, and invoke a specified test function.  The returned response is &quot;true&quot; if passed test, or error string if test failed." GUID="1C94C180-F86A-AF43-BD9F-37A9307F8BDB" ownerProjectName="BETestLib" superEventPath="" ttlUnits="Seconds" channelURI="/testservice/test" destinationName="function">
+  <properties name="name" ownerProjectName="BETestLib" conceptTypePath="/testservice/Events/TestRequest" ownerPath="/testservice/Events/TestRequest"/>
+  <properties name="preproc" ownerProjectName="BETestLib" type="boolean" conceptTypePath="/testservice/Events/TestRequest" ownerPath="/testservice/Events/TestRequest"/>
+  <expiryAction folder="/testservice/Events/TestRequest" name="TestRequest_expiryAction" ownerProjectName="BETestLib" actionText="" conditionText="">
+    <symbols>
+      <symbolList idName="testrequest" type="/testservice/Events/TestRequest"/>
+    </symbols>
+  </expiryAction>
+</event:SimpleEvent>

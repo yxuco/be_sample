@@ -1,0 +1,20 @@
+/**
+ * @description Add a SingleItems to arrayContained property of a Container, 
+ *      set new containedArray in the container, and reuturn the updated container.
+ */
+Concepts.Container rulefunction RuleFunctions.UpdateObject.updateContainer {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		Concepts.Container aContainer;
+		Concepts.SingleItems aSingleItems;
+		Concepts.ListItems aListItems;
+	}
+	body {
+		aContainer.arrayContained[aContainer.arrayContained@length] = aSingleItems;
+		aContainer.containedArray = aListItems;
+		
+		return aContainer;
+	}
+}
