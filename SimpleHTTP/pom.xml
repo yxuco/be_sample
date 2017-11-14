@@ -11,11 +11,11 @@
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.tibco.psg.sample</groupId>
+  <groupId>com.tibco.psg.be.sample</groupId>
   <artifactId>SimpleHTTP</artifactId>
-  <version>1.0.0</version>
   <!-- use default packaging type of jar:
   <packaging>ear</packaging> -->
+  <name>Simple BE CICD Sample</name>
 
   <properties>
     <bestats.version>1.0.0</bestats.version>
@@ -57,6 +57,18 @@
           <execution>
             <id>run-be-test</id>
             <phase>test</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- install be ear file to local repository -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>be-install-ear</id>
+            <phase>install</phase>
           </execution>
         </executions>
       </plugin>

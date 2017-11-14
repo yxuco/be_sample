@@ -14,10 +14,13 @@
   <artifactId>BETestLib</artifactId>
   <!-- use default packaging type of jar:
   <packaging>ear</packaging> -->
+  <name>BE Test Service Projlib</name>
 
   <properties>
     <beassert.version>1.0.0</beassert.version>
     <betestclient.version>1.0.0</betestclient.version>
+    <!-- resources (comma-delimited) to be included in exported projlib -->
+    <be.project.resources>testservice</be.project.resources>
   </properties>
 
   <build>
@@ -63,13 +66,17 @@
         </executions>
       </plugin>
 
-      <!-- build ear for BE --> 
+      <!-- build ear for BE test, and build projlib for test service --> 
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <executions>
           <execution>
             <id>be-build-ear</id>
+            <phase>compile</phase>
+          </execution>
+          <execution>
+            <id>be-build-projlib</id>
             <phase>compile</phase>
           </execution>
         </executions>
@@ -104,6 +111,17 @@
         </executions>
       </plugin>
 
+      <!-- install be projlib file to local repository -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>be-install-projlib</id>
+            <phase>install</phase>
+          </execution>
+        </executions>
+      </plugin>
 <!-- do not need be-maven-plugin, because all necessary steps are completed using other maven plugins. 
       <plugin>
         <groupId>com.tibco.be.maven.plugin</groupId>

@@ -29,8 +29,6 @@
     <be.project.root>${project.artifactId}</be.project.root>
     <!-- additional jars for buildear; child project may override it if require more jars -->
     <be.studiotools.class.path>.</be.studiotools.class.path>
-    <!-- by default install final BE ear file to a parent distribute filder, child project may override it -->
-    <be.distribute.path>${project.basedir}/../distribute</be.distribute.path>
   </properties>
 
   <build>
@@ -107,24 +105,22 @@
                 <outputDirectory>${project.build.directory}</outputDirectory>
               </configuration>
             </execution>
-            <!-- install final BE ear file to package distribution folder -->
+            <!-- copy resulting BE ear and projlib file to distribution folder -->
             <execution>
-              <id>be-distribute-ear</id>
-              <goals>
-                <goal>copy-resources</goal>
-              </goals>
-              <phase>install</phase>
+              <id>copy-to-distribute</id>
               <configuration>
                 <resources>
                   <resource>
                     <directory>${project.build.directory}</directory>
                     <includes>
                       <include>${project.build.finalName}.ear</include>
+                      <include>${project.build.finalName}.projlib</include>
+                      <include>${project.build.finalName}.jar</include>
                     </includes>
                     <filtering>false</filtering>
                   </resource>
                 </resources>
-                <outputDirectory>${be.distribute.path}</outputDirectory>
+                <outputDirectory>${distribute.path}</outputDirectory>
               </configuration>
             </execution>
           </executions>
@@ -324,7 +320,7 @@
           </executions>
         </plugin>
 
-        <!-- disable default-install, instead, use copy-resources to copy ear to distribution folder -->
+        <!-- disable default-install, instead, install ear and projlib separately -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-install-plugin</artifactId>
@@ -332,7 +328,33 @@
           <executions>
             <execution>
               <id>default-install</id>
-              <phase>none></phase>
+              <phase>none</phase>
+            </execution>
+            <execution>
+              <id>be-install-ear</id>
+              <goals>
+                <goal>install-file</goal>
+              </goals>
+              <phase>none</phase>
+              <configuration>
+                <file>${project.build.directory}/${project.build.finalName}.ear</file>
+                <generatePom>false</generatePom>
+                <pomFile>pom.xml</pomFile>
+                <packaging>ear</packaging>
+              </configuration>
+            </execution>
+            <execution>
+              <id>be-install-projlib</id>
+              <goals>
+                <goal>install-file</goal>
+              </goals>
+              <phase>none</phase>
+              <configuration>
+                <file>${project.build.directory}/${project.build.finalName}.projlib</file>
+                <generatePom>false</generatePom>
+                <pomFile>pom.xml</pomFile>
+                <packaging>projlib</packaging>
+              </configuration>
             </execution>
           </executions>
         </plugin>

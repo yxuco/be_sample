@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Root pom for all projects
+  Creation datetime: Thu Nov 09 21:21:51 MDT 2017
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.tibco.psg.sample</groupId>
+  <artifactId>BESample</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>CommonPOM</module>
+    <module>beassert</module>
+    <module>bestats</module>
+    <module>betestclient</module>
+    <module>BETestLib</module>
+    <module>SimpleHTTP</module>
+  </modules>
+</project>

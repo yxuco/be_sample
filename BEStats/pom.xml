@@ -11,7 +11,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>bestats</artifactId>
-  <packaging>jar</packaging>
+  <name>BE Stat Log Functions</name>
 
   <dependencies>
 

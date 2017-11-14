@@ -9,6 +9,7 @@
   <groupId>com.tibco.psg</groupId>
   <artifactId>CommonPOM</artifactId>
   <version>1.0.0</version>
+  <name>Common POM Definition</name>
   <packaging>pom</packaging>
 
   <properties>
@@ -18,6 +19,8 @@
     <okio.version>1.13.0</okio.version>
     <junit.version>4.12</junit.version>
     <hamcrest.version>1.3</hamcrest.version>
+    <!-- default location for artifact distribution -->
+    <distribute.path>${project.basedir}/../distribute</distribute.path>
   </properties>
 
   <!-- specify version of common dependency, so child project would not specify different versions. -->
@@ -60,5 +63,36 @@
         <filtering>true</filtering>
       </testResource>
     </testResources>
+    <pluginManagement>
+      <plugins>
+        <!-- copy resulting jar to distribution location. -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+          <executions>
+            <execution>
+              <id>copy-to-distribute</id>
+              <goals>
+                <goal>copy-resources</goal>
+              </goals>
+              <phase>install</phase>
+              <configuration>
+                <resources>
+                  <resource>
+                    <directory>${project.build.directory}</directory>
+                    <includes>
+                      <include>${project.build.finalName}.jar</include>
+                    </includes>
+                    <filtering>false</filtering>
+                  </resource>
+                </resources>
+                <outputDirectory>${distribute.path}</outputDirectory>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
 </project>

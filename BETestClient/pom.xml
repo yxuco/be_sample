@@ -11,7 +11,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>betestclient</artifactId>
-  <packaging>jar</packaging>
+  <name>BE Test Client Java Utility</name>
 
   <dependencies>
     <dependency>

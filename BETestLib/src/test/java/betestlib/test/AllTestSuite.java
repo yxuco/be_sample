@@ -22,9 +22,10 @@ public class AllTestSuite {
 		// pass repoRoot to unit test when using studio, e.g., use VM args: -DrepoRoot=/git/be
 		String repoRoot = System.getProperty("repoRoot");
 		String baseDir = null == repoRoot ? "" : repoRoot + "/BETestLib/";
-		System.out.println("baseDir=" + baseDir);
 		if (null == engine) {
-			engine = startBEEngine(baseDir + "target/be-engine-args", 180);
+			int waitSeconds = 150;
+			System.out.println("Note: if test fails before BE engine is up, update AllTestSuite.java to wait > " + waitSeconds + "s");
+			engine = startBEEngine(baseDir + "target/be-engine-args", waitSeconds);
 		}
 		initTestConnection("localhost", 8989);
 	}
