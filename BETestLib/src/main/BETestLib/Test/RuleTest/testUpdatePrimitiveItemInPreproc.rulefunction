@@ -18,9 +18,9 @@ void rulefunction Test.RuleTest.testUpdatePrimitiveItemInPreproc {
 		Object logger = Log.getLogger("Test.RuleTest.testUpdatePrimitiveItemInPreproc");
 		Log.log(logger, "info", "Start test Rules.UpdatePrimitiveItem");
 		
-		// For cache-only OM, reload object into working memory for new rule session
 		String extId = "PI:UpdatePrimitiveItemRule";
-		Concepts.PrimitiveItem pItem = Cluster.DataGrid.CacheLoadConceptByExtId(extId, true);
+		// For cache-only OM, reload object into working memory for new rule session
+		// Concepts.PrimitiveItem pItem = Cluster.DataGrid.CacheLoadConceptByExtId(extId, true);
 		
 		// create event to trigger the rule
 		Events.PrimitiveEvent evt = Events.PrimitiveEvent.PrimitiveEvent(
@@ -37,8 +37,9 @@ void rulefunction Test.RuleTest.testUpdatePrimitiveItemInPreproc {
 		Event.assertEvent(evt);
 		Engine.executeRules();
 		
-		// fetch the updated value of the concept from cache
-		pItem = Cluster.DataGrid.CacheLoadConceptByExtId(extId, true);
+		// For cache-only OM, fetch the updated value of the concept from cache
+		// pItem = Cluster.DataGrid.CacheLoadConceptByExtId(extId, true);
+		Concepts.PrimitiveItem pItem = Instance.getByExtId(extId);
 		Log.log(logger, "info", "Cache re-load returned: %s", pItem);
 		
 		// verify the updated concept

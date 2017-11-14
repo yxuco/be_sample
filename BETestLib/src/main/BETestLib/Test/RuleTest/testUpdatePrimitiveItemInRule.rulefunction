@@ -20,8 +20,8 @@ void rulefunction Test.RuleTest.testUpdatePrimitiveItemInRule {
 		// For cache-only OM, reload object into working memory for new rule session
 		// Note: newly created object here cannot be matched by invokeRule() below,
 		//       so, the matching object must have been created during test setup.
-		String extId = "PI:UpdatePrimitiveItemRule";
-		Cluster.DataGrid.CacheLoadConceptByExtId(extId, true);
+		// String extId = "PI:UpdatePrimitiveItemRule";
+		// Cluster.DataGrid.CacheLoadConceptByExtId(extId, true);
 
 		// create event to trigger the rule
 		Events.PrimitiveEvent evt = Events.PrimitiveEvent.PrimitiveEvent(

@@ -15,8 +15,54 @@
   <!-- use default packaging type of jar:
   <packaging>ear</packaging> -->
 
+  <properties>
+    <beassert.version>1.0.0</beassert.version>
+    <betestclient.version>1.0.0</betestclient.version>
+  </properties>
+
   <build>
     <plugins>
+      <!-- copy additional jars required for running this BE engine to server jUnit tests -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-additional-jars</id>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <phase>validate</phase>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${settings.localRepository}/com/tibco/psg/beassert/${beassert.version}</directory>
+                    <includes>
+                      <include>beassert-${beassert.version}.jar</include>
+                    </includes>
+                  <filtering>false</filtering>
+                </resource>
+                <resource>
+                  <directory>${settings.localRepository}/org/hamcrest/hamcrest-core/${hamcrest.version}</directory>
+                    <includes>
+                      <include>hamcrest-core-${hamcrest.version}.jar</include>
+                    </includes>
+                  <filtering>false</filtering>
+                </resource>
+                <resource>
+                  <directory>${settings.localRepository}/junit/junit/${junit.version}</directory>
+                    <includes>
+                      <include>junit-${junit.version}.jar</include>
+                    </includes>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
+              <outputDirectory>${project.build.directory}/lib</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
       <!-- build ear for BE --> 
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -29,14 +75,31 @@
         </executions>
       </plugin>
 
-      <!-- compile test code.  ant task is not executed by default mvn lifecycle, so call it explicitly --> 
+      <!-- enable default-testCompile to compile test code. --> 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
+        <artifactId>maven-compiler-plugin</artifactId>
         <executions>
           <execution>
-            <id>be-test-compile</id>
+            <id>default-testCompile</id>
             <phase>test-compile</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- enable default java test -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>default-test</id>
+            <phase>test</phase>
+            <configuration>
+              <includes>
+                <include>**/*AllTestSuite.java</include>
+              </includes>
+            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -80,7 +143,7 @@
     <dependency>
       <groupId>com.tibco.psg</groupId>
       <artifactId>betestclient</artifactId>
-      <version>1.0.0</version>
+      <version>${betestclient.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

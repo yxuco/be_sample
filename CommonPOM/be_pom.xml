@@ -22,6 +22,7 @@
   <properties>
     <!-- build user must set env: export BE_HOME=/usr/local/tibco_be/be/5.4, for example. -->
     <tibco.be.home>${env.BE_HOME}</tibco.be.home>
+    <tibco.home>${tibco.be.home}/../..</tibco.home>
     <tibco.be.studio.tools>${tibco.be.home}/studio/bin/studio-tools</tibco.be.studio.tools>
 
     <!-- by default, project name is the same as artifactId, child project can override it if necessary. -->
@@ -100,9 +101,6 @@
                 <resources>
                   <resource>
                     <directory>src/test/template</directory>
-                    <includes>
-                      <include>config.properties</include>
-                    </includes>
                     <filtering>true</filtering>
                   </resource>
                 </resources>
@@ -266,7 +264,7 @@
               <goals>
                 <goal>run</goal>
               </goals>
-              <phase>test-compile</phase>
+              <phase>none</phase>
               <configuration>
                 <target>
                   <ant antfile="build.xml" target="compile" />
@@ -287,14 +285,14 @@
             <!-- disable default test, and replace it with run-be-test -->
             <execution>
               <id>default-test</id>
-              <phase>none></phase>
+              <phase>none</phase>
             </execution>
             <execution>
               <id>run-be-test</id>
               <goals>
                 <goal>test</goal>
               </goals>
-              <phase>test</phase>
+              <phase>none</phase>
               <configuration>
                 <additionalClasspathElements>
                   <additionalClasspathElement>${tibco.be.home}/lib/*</additionalClasspathElement>

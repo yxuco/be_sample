@@ -14,6 +14,10 @@
   <properties>
     <!-- version number of BE, use this version to install jars in local Maven repository -->
     <tibco.be.version>5.4.1</tibco.be.version>
+    <okhttp.version>3.9.0</okhttp.version>
+    <okio.version>1.13.0</okio.version>
+    <junit.version>4.12</junit.version>
+    <hamcrest.version>1.3</hamcrest.version>
   </properties>
 
   <!-- specify version of common dependency, so child project would not specify different versions. -->
@@ -23,20 +27,20 @@
       <dependency>
         <groupId>com.squareup.okhttp3</groupId>
         <artifactId>okhttp</artifactId>
-        <version>3.9.0</version>
+        <version>${okhttp.version}</version>
       </dependency>
       
       <!-- unit test plugins -->
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
-        <version>4.12</version>
+        <version>${junit.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.hamcrest</groupId>
         <artifactId>hamcrest-core</artifactId>
-        <version>1.3</version>
+        <version>${hamcrest.version}</version>
         <scope>test</scope>
       </dependency>
     </dependencies>

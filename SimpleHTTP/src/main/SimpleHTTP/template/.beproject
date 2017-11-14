@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration:StudioProjectConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:configuration="http:///com/tibco/cep/studio/common/configuration/model/project_configuration.ecore" name="SimpleHTTP" version="5.4.1" build="086" xpathVersion="2.0">
-  <thirdpartyLibEntries entryType="Third Party" path="${settings.localRepository}/com/squareup/okhttp3/okhttp/3.9.0/okhttp-3.9.0.jar" timestamp="1505885647000">
+  <thirdpartyLibEntries entryType="Third Party" path="${settings.localRepository}/com/squareup/okhttp3/okhttp/${okhttp.version}/okhttp-${okhttp.version}.jar" timestamp="1505885647000">
     <nativeLibraryLocation/>
   </thirdpartyLibEntries>
-  <thirdpartyLibEntries entryType="Third Party" path="${settings.localRepository}/com/squareup/okio/okio/1.13.0/okio-1.13.0.jar" timestamp="1505889739000">
+  <thirdpartyLibEntries entryType="Third Party" path="${settings.localRepository}/com/squareup/okio/okio/${okio.version}/okio-${okio.version}.jar" timestamp="1505889739000">
+    <nativeLibraryLocation/>
+  </thirdpartyLibEntries>
+  <thirdpartyLibEntries entryType="Third Party" path="${settings.localRepository}/com/tibco.psg/bestats/${bestats.version}/bestats-${bestats.version}.jar" timestamp="1510473697000">
     <nativeLibraryLocation/>
   </thirdpartyLibEntries>
   <thirdpartyLibEntries path="JUNIT_HOME/junit.jar" var="true"/>

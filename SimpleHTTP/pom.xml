@@ -18,8 +18,9 @@
   <packaging>ear</packaging> -->
 
   <properties>
+    <bestats.version>1.0.0</bestats.version>
     <!-- add extra jars for buiding BE ear file -->
-    <be.studiotools.class.path>${settings.localRepository}/com/squareup/okhttp3/okhttp/3.9.0/okhttp-3.9.0.jar:${settings.localRepository}/com/squareup/okio/okio/1.13.0/okio-1.13.0.jar</be.studiotools.class.path>
+    <be.studiotools.class.path>${settings.localRepository}/com/tibco/psg/bestats/${bestats.version}/bestats-${bestats.version}.jar:${settings.localRepository}/com/squareup/okhttp3/okhttp/${okhttp.version}/okhttp-${okhttp.version}.jar:${settings.localRepository}/com/squareup/okio/okio/${okio.version}/okio-${okio.version}.jar</be.studiotools.class.path>
   </properties>
 
   <build>
@@ -36,7 +37,7 @@
         </executions>
       </plugin>
 
-      <!-- compile test code.  ant task is not executed by default mvn lifecycle, so call it explicitly --> 
+      <!-- compile test code using ant task, so BE libs are included --> 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
@@ -44,6 +45,18 @@
           <execution>
             <id>be-test-compile</id>
             <phase>test-compile</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- execute jUnit tests by running BE engine in API mode -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>run-be-test</id>
+            <phase>test</phase>
           </execution>
         </executions>
       </plugin>
@@ -69,6 +82,11 @@
 
   <!-- do not specify dependency versions, because versions are already defined in BEParent -->
   <dependencies>
+    <dependency>
+      <groupId>com.tibco.psg</groupId>
+      <artifactId>bestats</artifactId>
+      <version>${bestats.version}</version>
+    </dependency>
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>
       <artifactId>okhttp</artifactId>

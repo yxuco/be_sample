@@ -1,65 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <cluster xmlns="http://tibco.com/businessevents/configuration/5.4">
     <revision>
-        <version>72</version>
+        <version>75</version>
         <author>yxu</author>
-        <date>2017/11/12 17:28:25</date>
+        <date>2017/11/13 16:54:50</date>
         <comment/>
     </revision>
     <name>BETestLib</name>
     <message-encoding>UTF-8</message-encoding>
     <object-management>
-        <cache-manager>
-            <provider>
-                <name>TIBCO</name>
-            </provider>
-            <cache-agent-quorum/>
-            <backup-copies>1</backup-copies>
-            <entity-cache-size>10000</entity-cache-size>
-            <discovery-url/>
-            <listen-url/>
-            <remote-listen-url/>
-            <protocol-timeout>-1</protocol-timeout>
-            <read-timeout>60000</read-timeout>
-            <write-timeout>60000</write-timeout>
-            <lock-timeout>-1</lock-timeout>
-            <shoutdown-wait>8500</shoutdown-wait>
-            <workerthreads-count>4</workerthreads-count>
-            <explicit-tuple>false</explicit-tuple>
-            <object-table>
-                <max-size>100000</max-size>
-            </object-table>
-            <backing-store>
-                <persistence-option>None</persistence-option>
-                <cache-aside>true</cache-aside>
-                <cache-loader-class/>
-                <enforce-pools>false</enforce-pools>
-                <strategy>jdbc</strategy>
-                <type>Oracle</type>
-                <data-store-path/>
-                <persistence-policy>ASYNC</persistence-policy>
-                <parallel-recovery>true</parallel-recovery>
-                <primary-connection>
-                    <uri/>
-                    <initial-size>10</initial-size>
-                    <max-size>10</max-size>
-                    <min-size>10</min-size>
-                </primary-connection>
-            </backing-store>
-            <domain-objects>
-                <default-mode>cache</default-mode>
-                <check-for-version>true</check-for-version>
-                <constant>false</constant>
-                <enable-tracking>true</enable-tracking>
-                <evict-on-update>false</evict-on-update>
-                <cache-limited>false</cache-limited>
-                <subscribe>true</subscribe>
-                <pre-load-enabled>false</pre-load-enabled>
-                <pre-load-fetch-size>0</pre-load-fetch-size>
-                <pre-load-handles>false</pre-load-handles>
-                <concept-ttl>-1</concept-ttl>
-            </domain-objects>
-        </cache-manager>
+        <memory-manager/>
         <db-concepts>
             <db-uris/>
             <check-interval>60</check-interval>
