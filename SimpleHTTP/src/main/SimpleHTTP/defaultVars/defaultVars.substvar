@@ -82,16 +82,6 @@
             <modTime>1506115856891</modTime>
         </globalVariable>
         <globalVariable>
-            <name>TEST_INTERVAL</name>
-            <value>2000</value>
-            <type>Integer</type>
-            <deploymentSettable>true</deploymentSettable>
-            <serviceSettable>false</serviceSettable>
-            <description/>
-            <constraint/>
-            <modTime>1506287661682</modTime>
-        </globalVariable>
-        <globalVariable>
             <name>STAT_RESET_INTERVAL</name>
             <value>5000</value>
             <type>Integer</type>
@@ -100,6 +90,16 @@
             <description/>
             <constraint/>
             <modTime>1506287653610</modTime>
+        </globalVariable>
+        <globalVariable>
+            <name>TEST_INTERVAL</name>
+            <value>2000</value>
+            <type>Integer</type>
+            <deploymentSettable>true</deploymentSettable>
+            <serviceSettable>false</serviceSettable>
+            <description/>
+            <constraint/>
+            <modTime>1506287661682</modTime>
         </globalVariable>
     </globalVariables>
 </repository>

@@ -22,9 +22,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>BETestLib-1.0.0.projlib</name>
+			<name>BETestLib-${BETestLib.version}.projlib</name>
 			<type>2</type>
-			<locationURI>projlib:/file:/Users/yxu/.m2/repository/com/tibco/psg/be/BETestLib/1.0.0/BETestLib-1.0.0.projlib</locationURI>
+			<locationURI>projlib:/file:${settings.localRepository}/com/tibco/psg/be/BETestLib/${BETestLib.version}/BETestLib-${BETestLib.version}.projlib</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

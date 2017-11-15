@@ -1,0 +1,19 @@
+/**
+ * @description wrap functional test for the test service, which expects AssertionError on failed tests. Sample to run external tests via HTTP.
+ *   To manually verify it, start the engine in studio, then,
+ *   curl http://localhost:8989/testservice/test/function?name=/RemoteTest/wrapNormalRequest&preproc=true
+ */
+void rulefunction RemoteTest.wrapNormalRequest {
+	attribute {
+		validity = ACTION;
+	}
+	scope {
+		
+	}
+	body {
+		String err = FunctionalTests.testNormalRequest();
+		if (err != null) {
+			fail(err);
+		}
+	}
+}

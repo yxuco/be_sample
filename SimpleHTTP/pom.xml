@@ -19,8 +19,10 @@
 
   <properties>
     <bestats.version>1.0.0</bestats.version>
+    <beassert.version>1.0.0</beassert.version>
+    <BETestLib.version>1.0.0</BETestLib.version>
     <!-- add extra jars for buiding BE ear file -->
-    <be.studiotools.class.path>${settings.localRepository}/com/tibco/psg/bestats/${bestats.version}/bestats-${bestats.version}.jar:${settings.localRepository}/com/squareup/okhttp3/okhttp/${okhttp.version}/okhttp-${okhttp.version}.jar:${settings.localRepository}/com/squareup/okio/okio/${okio.version}/okio-${okio.version}.jar</be.studiotools.class.path>
+    <be.studiotools.class.path>${settings.localRepository}/com/tibco/psg/bestats/${bestats.version}/bestats-${bestats.version}.jar:${settings.localRepository}/com/squareup/okhttp3/okhttp/${okhttp.version}/okhttp-${okhttp.version}.jar:${settings.localRepository}/com/squareup/okio/okio/${okio.version}/okio-${okio.version}.jar:${settings.localRepository}/com/tibco/psg/beassert/${beassert.version}/beassert-${beassert.version}.jar</be.studiotools.class.path>
   </properties>
 
   <build>
@@ -98,6 +100,11 @@
       <groupId>com.tibco.psg</groupId>
       <artifactId>bestats</artifactId>
       <version>${bestats.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.tibco.psg</groupId>
+      <artifactId>beassert</artifactId>
+      <version>${beassert.version}</version>
     </dependency>
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>
