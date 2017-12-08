@@ -60,6 +60,11 @@
                     <filtering>true</filtering>
                   </resource>
                 </resources>
+            	<!-- use extra filter properties if necessary
+            	<filters>
+            		<filter>src/main/filters/mapping.properties</filter>
+            	</filters>
+            	-->
                 <outputDirectory>src/main/${be.project.root}</outputDirectory>
               </configuration>
             </execution>

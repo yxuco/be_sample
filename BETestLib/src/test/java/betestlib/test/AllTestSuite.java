@@ -23,11 +23,8 @@ public class AllTestSuite {
 		String repoRoot = System.getProperty("repoRoot");
 		String baseDir = null == repoRoot ? "" : repoRoot + "/BETestLib/";
 		if (null == engine) {
-			int waitSeconds = 150;
-			System.out.println("Note: if test fails before BE engine is up, update AllTestSuite.java to wait > " + waitSeconds + "s");
-			engine = startBEEngine(baseDir + "target/be-engine-args", waitSeconds);
+			engine = startBEEngine(baseDir + "target/be-engine-args", 8989);
 		}
-		initTestConnection("localhost", 8989);
 	}
 	
 	@AfterClass

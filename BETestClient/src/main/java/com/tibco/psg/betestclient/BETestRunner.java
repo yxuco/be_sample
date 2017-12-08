@@ -70,12 +70,13 @@ public class BETestRunner {
 	/**
 	 * Start a BE engine. It is typically invoked before starting the tests. Command and args for starting the engine is configured in a file.
 	 * The config file contains be-engine command and its arguments in separate lines, and the last line is the name of the working directory of the engine.
+	 * Wait until the engine is up and respond to HTTP ping.
 	 * 
 	 * @param commandConfig name of the config file
-	 * @param waitSeconds seconds to wait after the command is executed
+	 * @param httpPort HTTP listen port of the BE engine for receiving activity ping.
 	 * @return the Process instance of the BE engine
 	 */
-	public static Process startBEEngine(String commandConfig, long waitSeconds) {
+	public static Process startBEEngine(String commandConfig, int httpPort) {
 		try {
 			ArrayList<String> cmd = new ArrayList<String>();
 			BufferedReader reader = new BufferedReader(new FileReader(commandConfig));
@@ -95,10 +96,29 @@ public class BETestRunner {
 			ProcessBuilder pb = new ProcessBuilder(cmd);
 			pb.directory(new File(workDir));
 			Process p = pb.start();
-			System.out.println("Starting BE engine, wait " + waitSeconds + " seconds ...");
-			p.waitFor(waitSeconds, TimeUnit.SECONDS);
+			
+			// ping BE test listen port every 10s until success, or waited max of 5 minutes
+			System.out.println("Starting BE engine, wait ...");
+			initTestConnection("localhost", httpPort);
+			boolean starting = true;
+			int count = 0;
+			while (starting) {
+				p.waitFor(10, TimeUnit.SECONDS);
+				count++;
+				try {
+					sendTestRequest("", true); // ping test port
+					starting = false;
+					System.out.println("BE engine started.");
+				} catch (Exception ex) {
+					System.out.println("BE engine not ready, wait ...");
+				}
+				if (count >= 30) {
+					throw new Exception("Engine did not start in 5 minutes, check BE logs.");
+				}
+			}
 			return p;
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return null;
 		}

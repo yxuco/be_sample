@@ -218,4 +218,7 @@ application.args %APP_ARGS%
 #java.property.be.engine.jmx.connector.authenticate=false
 
 # Jars that should be skipped by Tomcat server's TLDJarScanner
-tomcat.util.scan.DefaultJarScanner.jarsToSkip=xdata.jar,tibrvj.jar
+tomcat.util.scan.DefaultJarScanner.jarsToSkip=*
+org.apache.catalina.startup.ContextConfig.jarsToSkip=*
+org.apache.catalina.startup.TldConfig.jarsToSkip=*
+

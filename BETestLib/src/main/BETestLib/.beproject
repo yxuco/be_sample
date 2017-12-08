@@ -10,6 +10,6 @@
     <nativeLibraryLocation/>
   </thirdpartyLibEntries>
   <javaSourceFolderEntries entryType="JAVA_SOURCE_FOLDER" path="/BETestLib/JavaSrc" readOnly="true"/>
-  <enterpriseArchiveConfiguration name="BETestLib" author="yxu" version="130" path="/Users/yxu/Developer/git/be/BETestLib/target/BETestLib-1.0.0.ear" tempOutputPath="/private/tmp" overwrite="true"/>
+  <enterpriseArchiveConfiguration name="BETestLib" author="yxu" version="129" path="/Users/yxu/Developer/git/be/BETestLib/target/BETestLib-1.0.0.ear" tempOutputPath="/private/tmp" overwrite="true"/>
   <bpmnProcessSettings/>
 </configuration:StudioProjectConfiguration>

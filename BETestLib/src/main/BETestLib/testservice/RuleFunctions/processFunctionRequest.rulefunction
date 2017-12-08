@@ -16,7 +16,11 @@ void rulefunction testservice.RuleFunctions.processFunctionRequest {
 			TestResponse resp;
 			try {
 				Log.log(logger, "info", "Invoke test %s in preprocessor context", req.name);
-				String result = testservice.RuleFunctions.invokeTest(req.name);
+				String result = "";
+				if (req.name != null && req.name != "") {
+					// return blank for ping with empty request
+					result = testservice.RuleFunctions.invokeTest(req.name);
+				}
 				resp = testservice.Events.TestResponse.TestResponse(
 					null /*extId String */,
 					result /*payload String */);
