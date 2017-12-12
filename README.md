@@ -27,7 +27,7 @@ After you clone this project to, e.g., $workspace/be, you can build all componen
 This will build all components and execute unit tests of the following 5 components:
 
  - BEAssert: Java implementation of BE catalog functions for Hamcrest matcher functions;
- - BEStats: Java implementation of BE catalog functions for collecting performance stats and storing stats in a time-serious database, i.e., InfluxDB;
+ - BEStats: Java implementation of BE catalog functions for collecting performance stats and storing stats in a time-series database, i.e., InfluxDB;
  - BETestClient: Java helper functions for wrapping and executing BE unit tests as Java jUnit tests;
  - BETestLib: BE projlib designed to provide an HTTP service for processing jUnit test requests; This sample demonstrates the approach of implementing BE unit tests inside the BE project, and driving the tests using a jUnit wrapper;  It also demonstrates the use of Maven to build BE projlibs;
  - SimpleHTTP: BE sample to demonstrate the approach of implementing BE unit tests in Java, and executing jUnit tests using API-mode of BE engines.
