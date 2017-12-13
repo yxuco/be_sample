@@ -24,7 +24,7 @@
 		<link>
 			<name>BETestLib-${BETestLib.version}.projlib</name>
 			<type>2</type>
-			<locationURI>projlib:/file:${settings.localRepository}/com/tibco/psg/be/BETestLib/${BETestLib.version}/BETestLib-${BETestLib.version}.projlib</locationURI>
+			<locationURI>projlib:/file:${repodir}/com/tibco/psg/be/BETestLib/${BETestLib.version}/BETestLib-${BETestLib.version}.projlib</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

@@ -32,7 +32,7 @@
         <artifactId>okhttp</artifactId>
         <version>${okhttp.version}</version>
       </dependency>
-      
+
       <!-- unit test plugins -->
       <dependency>
         <groupId>junit</groupId>

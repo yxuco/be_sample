@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration:StudioProjectConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:configuration="http:///com/tibco/cep/studio/common/configuration/model/project_configuration.ecore" name="SimpleHTTP" version="5.4.1" build="086" xpathVersion="2.0">
-  <thirdpartyLibEntries entryType="Third Party" path="${settings.localRepository}/com/tibco/psg/bestats/${bestats.version}/bestats-${bestats.version}.jar" timestamp="1510728097000">
+  <thirdpartyLibEntries entryType="Third Party" path="${repodir}/com/tibco/psg/bestats/${bestats.version}/bestats-${bestats.version}.jar" timestamp="1510728097000">
     <nativeLibraryLocation/>
   </thirdpartyLibEntries>
-  <thirdpartyLibEntries entryType="Third Party" path="${settings.localRepository}/com/squareup/okhttp3/okhttp/${okhttp.version}/okhttp-${okhttp.version}.jar" timestamp="1505885647000">
+  <thirdpartyLibEntries entryType="Third Party" path="${repodir}/com/squareup/okhttp3/okhttp/${okhttp.version}/okhttp-${okhttp.version}.jar" timestamp="1505885647000">
     <nativeLibraryLocation/>
   </thirdpartyLibEntries>
-  <thirdpartyLibEntries entryType="Third Party" path="${settings.localRepository}/com/squareup/okio/okio/${okio.version}/okio-${okio.version}.jar" timestamp="1505889739000">
+  <thirdpartyLibEntries entryType="Third Party" path="${repodir}/com/squareup/okio/okio/${okio.version}/okio-${okio.version}.jar" timestamp="1505889739000">
     <nativeLibraryLocation/>
   </thirdpartyLibEntries>
-  <thirdpartyLibEntries entryType="Third Party" path="${settings.localRepository}/com/tibco/psg/beassert/${beassert.version}/beassert-${beassert.version}.jar" timestamp="1510642462000">
+  <thirdpartyLibEntries entryType="Third Party" path="${repodir}/com/tibco/psg/beassert/${beassert.version}/beassert-${beassert.version}.jar" timestamp="1510642462000">
     <nativeLibraryLocation/>
   </thirdpartyLibEntries>
   <thirdpartyLibEntries path="JUNIT_HOME/junit.jar" var="true"/>
-  <projectLibEntries path="${settings.localRepository}/com/tibco/psg/be/BETestLib/${BETestLib.version}/BETestLib-${BETestLib.version}.projlib" timestamp="1510728097000"/>
+  <projectLibEntries path="${repodir}/com/tibco/psg/be/BETestLib/${BETestLib.version}/BETestLib-${BETestLib.version}.projlib" timestamp="1510728097000"/>
   <javaSourceFolderEntries entryType="JAVA_SOURCE_FOLDER" path="/SimpleHTTP/JavaSrc" readOnly="true"/>
-  <enterpriseArchiveConfiguration name="SimpleHTTP" author="demo" version="104" path="${project.build.directory}/${project.build.finalName}.ear" tempOutputPath="/private/tmp" overwrite="true"/>
+  <enterpriseArchiveConfiguration name="SimpleHTTP" author="demo" version="104" path="${rootdir}/target/${project.build.finalName}.ear" tempOutputPath="/private/tmp" overwrite="true"/>
   <bpmnProcessSettings/>
 </configuration:StudioProjectConfiguration>

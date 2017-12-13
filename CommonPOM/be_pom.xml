@@ -29,12 +29,36 @@
     <be.project.root>${project.artifactId}</be.project.root>
     <!-- additional jars for buildear; child project may override it if require more jars -->
     <be.studiotools.class.path>.</be.studiotools.class.path>
+
+    <!-- set project property so gmaven-plugin can access it -->
+    <local.repository.dir>${settings.localRepository}</local.repository.dir>
   </properties>
 
   <build>
     <!-- define generic plugin tasks, so child project can pick from these tasks -->
     <pluginManagement>
       <plugins>
+        <!-- set properties used by be-project template -->
+        <plugin>
+          <groupId>org.codehaus.gmaven</groupId>
+          <artifactId>gmaven-plugin</artifactId>
+          <version>1.5</version>
+          <executions>
+            <execution>
+              <id>set-be-template-properties</id>
+              <phase>none</phase>
+              <goals>
+                <goal>execute</goal>
+              </goals>
+              <configuration>
+                <source>
+                  pom.properties['rootdir']=project.basedir.absolutePath.replace(File.separator,'/');
+                  pom.properties['repodir']=project.properties['local.repository.dir'].replace(File.separator,'/');
+                </source>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
         <!-- use this plugin to manipulate variables specific to individual developers;
              map environment variables in template files, and then copy the result to target location.
         -->
@@ -52,7 +76,7 @@
               <goals>
                 <goal>copy-resources</goal>
               </goals>
-              <phase>validate</phase>
+              <phase>process-resources</phase>
               <configuration>
                 <resources>
                   <resource>
@@ -77,7 +101,7 @@
               <goals>
                 <goal>copy-resources</goal>
               </goals>
-              <phase>validate</phase>
+              <phase>process-resources</phase>
               <configuration>
                 <resources>
                   <resource>
@@ -99,7 +123,7 @@
               <goals>
                 <goal>copy-resources</goal>
               </goals>
-              <phase>validate</phase>
+              <phase>process-resources</phase>
               <configuration>
                 <resources>
                   <resource>

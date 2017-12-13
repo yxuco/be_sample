@@ -21,10 +21,22 @@
     <betestclient.version>1.0.0</betestclient.version>
     <!-- resources (comma-delimited) to be included in exported projlib -->
     <be.project.resources>testservice</be.project.resources>
+    <local.repository.dir>${settings.localRepository}</local.repository.dir>
   </properties>
 
   <build>
     <plugins>
+      <!-- set properties for be-project template -->
+      <plugin>
+        <groupId>org.codehaus.gmaven</groupId>
+        <artifactId>gmaven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>set-be-template-properties</id>
+            <phase>validate</phase>
+          </execution>
+        </executions>
+      </plugin>
       <!-- copy additional jars required for running this BE engine to server jUnit tests -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

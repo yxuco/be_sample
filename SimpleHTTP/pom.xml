@@ -27,6 +27,17 @@
 
   <build>
     <plugins>
+      <!-- set properties for be-project template -->
+      <plugin>
+        <groupId>org.codehaus.gmaven</groupId>
+        <artifactId>gmaven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>set-be-template-properties</id>
+            <phase>validate</phase>
+          </execution>
+        </executions>
+      </plugin>
       <!-- build ear for BE --> 
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
