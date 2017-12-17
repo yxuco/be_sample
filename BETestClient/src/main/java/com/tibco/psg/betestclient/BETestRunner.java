@@ -77,6 +77,11 @@ public class BETestRunner {
 	 * @return the Process instance of the BE engine
 	 */
 	public static Process startBEEngine(String commandConfig, int httpPort) {
+		initTestConnection("localhost", httpPort);
+		if (!(new File(commandConfig)).exists()) {
+			System.out.println("No engine config, assuming BE engine started on port " + httpPort);
+			return null;
+		}
 		try {
 			ArrayList<String> cmd = new ArrayList<String>();
 			BufferedReader reader = new BufferedReader(new FileReader(commandConfig));
@@ -99,7 +104,6 @@ public class BETestRunner {
 			
 			// ping BE test listen port every 10s until success, or waited max of 5 minutes
 			System.out.println("Starting BE engine, wait ...");
-			initTestConnection("localhost", httpPort);
 			boolean starting = true;
 			int count = 0;
 			while (starting) {

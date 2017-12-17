@@ -34,7 +34,7 @@ tibco.env.APP_ARGS=
 #    All classes and jars in these directories will be automatically picked
 #    up. You can also specify individual files. Use forward slashes only.
 #
-tibco.env.CUSTOM_EXT_PREPEND_CP=${project.build.directory}/lib
+tibco.env.CUSTOM_EXT_PREPEND_CP=${rootdir}/target/lib
 tibco.env.CUSTOM_EXT_APPEND_CP=
 
 
@@ -83,7 +83,8 @@ tibco.env.JVM_LIB_DIR=${tibco.home}/tibcojre64/1.8.0/lib/
 #           -XX:+CMSIncrementalMode -XX:+CMSIncrementalPacing -XX:+UseCMSCompactAtFullCollection -XX:CMSFullGCsBeforeCompaction=2
 #           -XX:+DisableExplicitGC -XX:+UseTLAB -XX:+UseSpinning -XX:+UseFastAccessorMethods
 #
-java.extended.properties=-server -d64 -Xms1024m -Xmx2048m -javaagent:%BE_HOME%/lib/cep-base.jar -XX:MaxMetaspaceSize=256m -XX:+UseParNewGC -XX:+UseConcMarkSweepGC
+java.extended.properties=-server -d64 -Xms1024m -Xmx2048m -javaagent:${rootdir}/target/lib/jacocoagent.jar=output=file,destfile=${rootdir}/target/jacoco/data/BETestLib.exec,inclnolocationclasses=true -javaagent:%BE_HOME%/lib/cep-base.jar -XX:MaxMetaspaceSize=256m -XX:+UseParNewGC -XX:+UseConcMarkSweepGC
+#java.extended.properties=-server -d64 -Xms1024m -Xmx2048m -javaagent:${repodir}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}.jar=output=file,destfile=${rootdir}/target/jacoco/data/BETestLib.exec,inclnolocationclasses=true -javaagent:%BE_HOME%/lib/cep-base.jar -XX:MaxMetaspaceSize=256m -XX:+UseParNewGC -XX:+UseConcMarkSweepGC
 
 #
 # Parameters for remote debugging.

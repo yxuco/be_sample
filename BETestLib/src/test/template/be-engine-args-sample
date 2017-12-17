@@ -1,3 +1,5 @@
+# rename this file to be-engine-args if you want to start test be-engine when sure-fire-plugin starts
+
 # arguments to start be-engine for testing
 ${tibco.be.home}/bin/be-engine
 --propFile
@@ -11,4 +13,4 @@ default
 ./${project.build.finalName}.ear
 
 # working directory to start the be-engine
-${project.build.directory}
+${rootdir}/target

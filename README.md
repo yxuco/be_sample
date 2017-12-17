@@ -1,4 +1,11 @@
-# BE CICD Sample
+# TIBCO BusinessEvents CICD Sample Using Maven, jUnit, and Jacoco
+
+### Prerequisites
+
+ - Install TIBCO BusinessEvents 5.4.1, and set env, e.g., export BE_HOME=/usr/local/tibco/be/5.4.1
+ - Verify that curl is in the PATH, e.g., curl --version (download and install curl if it not already available)
+
+Note: This sample is tested on Mac, and should work on *nix.
 
 ### Install TIBCO BusinessEvents jars into local Maven repository
 
@@ -31,6 +38,8 @@ This will build all components and execute unit tests of the following 5 compone
  - BETestClient: Java helper functions for wrapping and executing BE unit tests as Java jUnit tests;
  - BETestLib: BE projlib designed to provide an HTTP service for processing jUnit test requests; This sample demonstrates the approach of implementing BE unit tests inside the BE project, and driving the tests using a jUnit wrapper;  It also demonstrates the use of Maven to build BE projlibs;
  - SimpleHTTP: BE sample to demonstrate the approach of implementing BE unit tests in Java, and executing jUnit tests using API-mode of BE engines.
+
+Besides, Jacoco code-coverage report is also generated for BETestLib, which is in be/BETestLib/target/jacoco/reports/BETestLib/index.html.
 
 ## The author
 

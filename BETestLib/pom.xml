@@ -37,7 +37,7 @@
           </execution>
         </executions>
       </plugin>
-      <!-- copy additional jars required for running this BE engine to server jUnit tests -->
+      <!-- copy additional jars required for running this BE engine to serve jUnit tests -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
@@ -69,6 +69,10 @@
                     <includes>
                       <include>junit-${junit.version}.jar</include>
                     </includes>
+                  <filtering>false</filtering>
+                </resource>
+                <resource>
+                  <directory>${project.basedir}/src/test/lib</directory>
                   <filtering>false</filtering>
                 </resource>
               </resources>
@@ -106,6 +110,18 @@
         </executions>
       </plugin>
 
+      <!-- start BE engine before unit tests -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>start-be-engine</id>
+            <phase>test-compile</phase>
+          </execution>
+        </executions>
+      </plugin>
+
       <!-- enable default java test -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -123,6 +139,30 @@
         </executions>
       </plugin>
 
+      <!-- generate code-coverage report -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>be-coverage-report</id>
+            <phase>test</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- stop BE engine after unit tests -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>stop-be-engine</id>
+            <phase>test</phase>
+          </execution>
+        </executions>
+      </plugin>
+
       <!-- install be projlib file to local repository -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -134,6 +174,7 @@
           </execution>
         </executions>
       </plugin>
+
 <!-- do not need be-maven-plugin, because all necessary steps are completed using other maven plugins. 
       <plugin>
         <groupId>com.tibco.be.maven.plugin</groupId>

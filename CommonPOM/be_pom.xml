@@ -92,29 +92,6 @@
                 <outputDirectory>src/main/${be.project.root}</outputDirectory>
               </configuration>
             </execution>
-            <!-- generate ant build.xml for test-compile from template;
-                 the result build.xml is used to compile test code, and
-                 it can also be used to create studio project for developing unit tests.
-             -->
-            <execution>
-              <id>be-test-gen</id>
-              <goals>
-                <goal>copy-resources</goal>
-              </goals>
-              <phase>process-resources</phase>
-              <configuration>
-                <resources>
-                  <resource>
-                    <directory>src/test/template</directory>
-                    <includes>
-                      <include>build.xml</include>
-                    </includes>
-                    <filtering>true</filtering>
-                  </resource>
-                </resources>
-                <outputDirectory>${project.basedir}</outputDirectory>
-              </configuration>
-            </execution>
             <!-- generate config.properties for running unit tests that requires BE engine started in API mode;
                  the template variables in this file are replaced with values matching the developer's environment.
             -->
@@ -158,7 +135,7 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>exec-maven-plugin</artifactId>
-          <version>1.5.0</version>
+          <version>${exec.plugin.version}</version>
           <executions>
             <!-- build ear for BE project that does not use any projlib;
                  child project pom should set the property be.studiotools.class.path to additional jars;
@@ -247,8 +224,45 @@
                 </arguments>
               </configuration>
             </execution>
+
+            <!-- start BE engine for test:
+                 start.sh script should be created in src/test/template, which will be copied to target folder to run.
+            -->
+            <execution>
+              <id>start-be-engine</id>
+              <goals>
+                <goal>exec</goal>
+              </goals>
+              <phase>none</phase>
+              <configuration>
+                <executable>bash</executable>
+                <workingDirectory>${project.build.directory}</workingDirectory>
+                <arguments>
+                  <argument>start.sh</argument>
+                </arguments>
+              </configuration>
+            </execution>
+
+            <!-- stop BE engine after test:
+                 stop.sh script should be created in src/test/template, which will be copied to target folder to run.
+            -->
+            <execution>
+              <id>stop-be-engine</id>
+              <goals>
+                <goal>exec</goal>
+              </goals>
+              <phase>none</phase>
+              <configuration>
+                <executable>bash</executable>
+                <workingDirectory>${project.build.directory}</workingDirectory>
+                <arguments>
+                  <argument>stop.sh</argument>
+                </arguments>
+              </configuration>
+            </execution>
           </executions>
         </plugin>
+
         <!-- disable default-compile and default-test-compile, instead, use buildear for BE compile and antrun for jUnit compile -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -265,6 +279,7 @@
             </execution>
           </executions>
         </plugin>
+
         <!-- compile test code using antrun plugin:
              it requires all BE jars to compile the test code that launches BE engine in API mode;
              cannot use compiler plugin because too many BE jars are required to compile the code;
@@ -273,7 +288,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-antrun-plugin</artifactId>
-          <version>1.8</version>
+          <version>${antrun.version}</version>
           <dependencies>
             <dependency>  <!-- work-around a problem of the plugin that uses wrong JAVA_HOME environment -->
               <groupId>com.sun</groupId>
@@ -292,12 +307,45 @@
               <phase>none</phase>
               <configuration>
                 <target>
-                  <ant antfile="build.xml" target="compile" />
+                  <ant antfile="target/build.xml" target="compile" />
                 </target>
               </configuration>
             </execution>
           </executions>
         </plugin>
+
+        <!-- create jacoco code-coverage report for BE tests:
+             ant build script should be defined in the src/test/template folder as jacoco.xml
+         -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>${antrun.version}</version>
+          <dependencies>
+            <dependency>  <!-- work-around a problem of the plugin that uses wrong JAVA_HOME environment -->
+              <groupId>com.sun</groupId>
+              <artifactId>tools</artifactId>
+              <version>1.8.0</version>
+              <scope>system</scope>
+              <systemPath>${java.home}/../lib/tools.jar</systemPath>
+            </dependency>
+          </dependencies>
+          <executions>
+            <execution>
+              <id>be-coverage-report</id>
+              <goals>
+                <goal>run</goal>
+              </goals>
+              <phase>none</phase>
+              <configuration>
+                <target>
+                  <ant antfile="target/jacoco.xml" target="report" />
+                </target>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+
         <!-- execute jUnit tests using surefire plugin: 
              assuming that AllTestSuite.java wraps all unit test suites; 
              include all jars required to run BE engine in API mode.

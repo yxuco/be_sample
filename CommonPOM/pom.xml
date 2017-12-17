@@ -19,6 +19,10 @@
     <okio.version>1.13.0</okio.version>
     <junit.version>4.12</junit.version>
     <hamcrest.version>1.3</hamcrest.version>
+    <jacoco.version>0.7.9</jacoco.version>
+    <exec.plugin.version>1.5.0</exec.plugin.version>
+    <antrun.version>1.8</antrun.version>
+
     <!-- default location for artifact distribution -->
     <distribute.path>${project.basedir}/../distribute</distribute.path>
   </properties>
