@@ -10,16 +10,16 @@
 #==========================================================
 #
 
-tibco.env.PSP=:
+tibco.env.PSP=;
 tibco.env.TIB_HOME=${tibco.home}
 tibco.env.BE_HOME=${tibco.be.home}
-tibco.env.AS_HOME=${tibco.home}/as/2.2
+tibco.env.AS_HOME=${tibco.home}/as/2.3
 tibco.env.RV_HOME=
 tibco.env.EMS_HOME=
 tibco.env.HAWK_HOME=
 tibco.env.TERR_HOME=
 tibco.env.FTL_HOME=
-tibco.env.ECLIPSE_PATH=eclipse/Eclipse.app/Contents/Eclipse
+tibco.env.ECLIPSE_PATH=eclipse
 tibco.env.BE_ECLIPSE_HOME=%BE_HOME%/eclipse-platform/%ECLIPSE_PATH%
 ECLIPSE_HOME=%TIBCO_CUSTOMER_ECLIPSE_DIR%
 
@@ -42,7 +42,7 @@ tibco.env.CUSTOM_EXT_APPEND_CP=
 # JVM related settings. Choose your options carefully.
 #==========================================================
 
-tibco.env.TIB_JAVA_HOME=${tibco.home}/tibcojre64/1.8.0
+tibco.env.TIB_JAVA_HOME=c:/tibco_be/tibcojre64/1.8.0
 #
 # Ensure that the JVM_LIB_PATH points to the appropriate JVM Server DLL or SO.
 #
@@ -57,8 +57,8 @@ tibco.env.TIB_JAVA_HOME=${tibco.home}/tibcojre64/1.8.0
 #    %TIB_JAVA_HOME%/lib/i386/server/libjvm.dll
 #
 #
-tibco.env.JVM_LIB_PATH=${tibco.home}/tibcojre64/1.8.0/lib/server/libjvm.dylib
-tibco.env.JVM_LIB_DIR=${tibco.home}/tibcojre64/1.8.0/lib/
+tibco.env.JVM_LIB_PATH=c:/tibco_be/tibcojre64/1.8.0/bin/server/jvm.dll
+tibco.env.JVM_LIB_DIR=c:/tibco_be/tibcojre64/1.8.0/bin/server
 
 #
 # 32 bit JVM parameters for production. Increase heap size and tune other
@@ -69,7 +69,7 @@ tibco.env.JVM_LIB_DIR=${tibco.home}/tibcojre64/1.8.0/lib/
 #           -XX:+CMSIncrementalMode -XX:+CMSIncrementalPacing -XX:+UseCMSCompactAtFullCollection -XX:CMSFullGCsBeforeCompaction=2
 #           -XX:+DisableExplicitGC -XX:+UseTLAB -XX:+UseSpinning -XX:+UseFastAccessorMethods
 #
-#java.extended.properties=-server -Xms1024m -Xmx2048m -javaagent:%BE_HOME%/lib/cep-base.jar -XX:MaxMetaspaceSize=256m -XX:+UseParNewGC -XX:+UseConcMarkSweepGC
+# java.extended.properties=-server -Xms1024m -Xmx1024m -javaagent:%BE_HOME%/lib/cep-base.jar -XX:MaxMetaspaceSize=256m -XX:+UseParNewGC -XX:+UseConcMarkSweepGC
 
 #
 # 64 bit JVM parameters for production. Increase heap size and tune other
@@ -83,14 +83,13 @@ tibco.env.JVM_LIB_DIR=${tibco.home}/tibcojre64/1.8.0/lib/
 #           -XX:+CMSIncrementalMode -XX:+CMSIncrementalPacing -XX:+UseCMSCompactAtFullCollection -XX:CMSFullGCsBeforeCompaction=2
 #           -XX:+DisableExplicitGC -XX:+UseTLAB -XX:+UseSpinning -XX:+UseFastAccessorMethods
 #
-java.extended.properties=-server -d64 -Xms1024m -Xmx2048m -javaagent:${rootdir}/target/lib/jacocoagent.jar=output=tcpserver,address=localhost,port=6400,inclnolocationclasses=true -javaagent:%BE_HOME%/lib/cep-base.jar -XX:MaxMetaspaceSize=256m -XX:+UseParNewGC -XX:+UseConcMarkSweepGC
-#java.extended.properties=-server -d64 -Xms1024m -Xmx2048m -javaagent:${repodir}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}.jar=output=file,destfile=${rootdir}/target/jacoco/data/BETestLib.exec,inclnolocationclasses=true -javaagent:%BE_HOME%/lib/cep-base.jar -XX:MaxMetaspaceSize=256m -XX:+UseParNewGC -XX:+UseConcMarkSweepGC
+java.extended.properties=-server -d64 -Xms1024m -Xmx2048m -Xmx2048m -javaagent:${rootdir}/target/lib/jacocoagent.jar=output=tcpserver,address=localhost,port=6400,inclnolocationclasses=true -javaagent:%BE_HOME%/lib/cep-base.jar -XX:MaxMetaspaceSize=256m -XX:+UseParNewGC -XX:+UseConcMarkSweepGC
 
 #
 # Parameters for remote debugging.
 #
-#tibco.env.JDI_PORT=5192
-#java.extended.properties=-Xms1024m -Xmx1024m -debug -agentlib:jdwp=transport=dt_socket,address=%JDI_PORT%,suspend=n,server=y
+# tibco.env.JDI_PORT=5192
+# java.extended.properties=-Xms1024m -Xmx1024m -XX:MaxPermSize=256m -Xdebug -Xrunjdwp:transport=dt_socket,address=%JDI_PORT%,suspend=n,server=y
 
 #==========================================================
 # Classpath and other environment settings. You do not have
@@ -146,7 +145,7 @@ java.stop.method
 #
 java.property.tibco_home %TIB_HOME%
 java.property.tibco_tra_version %TRA_APPEND_VERSION%
-java.property.BE_HOME ${tibco.be.home}
+java.property.BE_HOME c:/tibco_be/be/5.4
 
 #
 # Specifies the classpath with expansion on
@@ -219,7 +218,4 @@ application.args %APP_ARGS%
 #java.property.be.engine.jmx.connector.authenticate=false
 
 # Jars that should be skipped by Tomcat server's TLDJarScanner
-tomcat.util.scan.DefaultJarScanner.jarsToSkip=*
-org.apache.catalina.startup.ContextConfig.jarsToSkip=*
-org.apache.catalina.startup.TldConfig.jarsToSkip=*
-
+tomcat.util.scan.DefaultJarScanner.jarsToSkip=xdata.jar,tibrvj.jar

@@ -32,6 +32,13 @@
 
     <!-- set project property so gmaven-plugin can access it -->
     <local.repository.dir>${settings.localRepository}</local.repository.dir>
+    
+    <!-- be engine start and stop -->
+    <shell.executable>bash</shell.executable>
+    <shell.command.flag>-v</shell.command.flag>
+    <be.start.argument>start.sh</be.start.argument>
+    <be.stop.argument>stop.sh</be.stop.argument>
+    <be.wait.argument>wait-for-be.sh</be.wait.argument>
   </properties>
 
   <build>
@@ -78,6 +85,7 @@
               </goals>
               <phase>process-resources</phase>
               <configuration>
+                <escapeWindowsPaths>false</escapeWindowsPaths>
                 <resources>
                   <resource>
                     <directory>src/main/${be.project.root}/template</directory>
@@ -102,6 +110,7 @@
               </goals>
               <phase>process-resources</phase>
               <configuration>
+                <escapeWindowsPaths>false</escapeWindowsPaths>
                 <resources>
                   <resource>
                     <directory>src/test/template</directory>
@@ -227,7 +236,7 @@
 
             <!-- start BE engine for test:
                  start.sh script should be created in src/test/template, which will be copied to target folder to run.
-            -->
+                 Note: this blocks on Windows os, so use antrun to work-around
             <execution>
               <id>start-be-engine</id>
               <goals>
@@ -235,10 +244,31 @@
               </goals>
               <phase>none</phase>
               <configuration>
-                <executable>bash</executable>
+                <executable>${shell.executable}</executable>
                 <workingDirectory>${project.build.directory}</workingDirectory>
                 <arguments>
-                  <argument>start.sh</argument>
+                  <argument>${shell.command.flag}</argument>
+                  <argument>${be.start.argument}</argument>
+                </arguments>
+              </configuration>
+            </execution>
+            -->
+
+            <!-- wait BE engine to be ready for test:
+                 wait-for-be.sh script should be created in src/test/template, which will be copied to target folder to run.
+            -->
+            <execution>
+              <id>wait-be-engine</id>
+              <goals>
+                <goal>exec</goal>
+              </goals>
+              <phase>none</phase>
+              <configuration>
+                <executable>${shell.executable}</executable>
+                <workingDirectory>${project.build.directory}</workingDirectory>
+                <arguments>
+                  <argument>${shell.command.flag}</argument>
+                  <argument>${be.wait.argument}</argument>
                 </arguments>
               </configuration>
             </execution>
@@ -253,10 +283,11 @@
               </goals>
               <phase>none</phase>
               <configuration>
-                <executable>bash</executable>
+                <executable>${shell.executable}</executable>
                 <workingDirectory>${project.build.directory}</workingDirectory>
                 <arguments>
-                  <argument>stop.sh</argument>
+                  <argument>${shell.command.flag}</argument>
+                  <argument>${be.stop.argument}</argument>
                 </arguments>
               </configuration>
             </execution>
@@ -280,6 +311,41 @@
           </executions>
         </plugin>
 
+        <!-- start BE engine for test:
+             start.sh script should be created in src/test/template, which will be copied to target folder to run.
+        -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>${antrun.version}</version>
+          <dependencies>
+            <dependency>  <!-- work-around a problem of the plugin that uses wrong JAVA_HOME environment -->
+              <groupId>com.sun</groupId>
+              <artifactId>tools</artifactId>
+              <version>1.8.0</version>
+              <scope>system</scope>
+              <systemPath>${java.home}/../lib/tools.jar</systemPath>
+            </dependency>
+          </dependencies>
+          <executions>
+            <execution>
+              <id>start-be-engine</id>
+              <goals>
+                <goal>run</goal>
+              </goals>
+              <phase>none</phase>
+              <configuration>
+                <target>
+                  <exec executable="${shell.executable}" spawn="true" dir="${project.build.directory}">
+                    <arg value="${shell.command.flag}" />
+                    <arg value="${be.start.argument}" />
+                  </exec>
+                </target>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        
         <!-- compile test code using antrun plugin:
              it requires all BE jars to compile the test code that launches BE engine in API mode;
              cannot use compiler plugin because too many BE jars are required to compile the code;
@@ -452,4 +518,22 @@
       </plugins>
     </pluginManagement>
   </build>
+  
+  <profiles>
+    <profile>
+      <id>windows</id>
+      <activation>
+        <os>
+          <family>windows</family>
+        </os>
+      </activation>
+      <properties>
+        <shell.executable>cmd</shell.executable>
+        <shell.command.flag>/c</shell.command.flag>
+        <be.start.argument>start.bat</be.start.argument>
+        <be.stop.argument>stop.bat</be.stop.argument>
+        <be.wait.argument>wait-for-be.bat</be.wait.argument>
+      </properties>
+    </profile>
+  </profiles>
 </project>

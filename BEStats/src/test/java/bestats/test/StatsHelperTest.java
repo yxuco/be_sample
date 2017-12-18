@@ -29,8 +29,8 @@ public class StatsHelperTest {
 		}
 		long[] stat = getStat("Constant", false);
 		assertEquals("total count is 30", 30, stat[0]);
-		assertTrue("total elapsed time between 480 and 700 ms", stat[2] >= 480 && stat[2] <= 700);
-		assertTrue("total value between 480 and 700", stat[1] >= 480 && stat[1] <= 700);
+		assertTrue("total elapsed time between 400 and 700 ms", stat[2] >= 400 && stat[2] <= 700);
+		assertTrue("total value between 400 and 700", stat[1] >= 400 && stat[1] <= 700);
 	}
 	
 	@Test

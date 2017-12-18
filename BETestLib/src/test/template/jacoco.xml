@@ -18,7 +18,7 @@
     <delete dir="${result.report.dir}" />
   </target>
 
-  <target name="merge">
+  <target name="merge" depends="dump">
     <jacoco:merge destfile="${result.exec.file.final}">
       <fileset dir="${result.exec.file.collection}" includes="*.exec"/>
     </jacoco:merge>
@@ -29,7 +29,7 @@
     <jacoco:dump address="localhost" port="6400" reset="true" append="false" destfile="${result.exec.file.collection}/BETestLib.exec"/>
   </target>
 
-  <target name="report" depends="merge">
+  <target name="report" depends="clean,merge">
     <!-- Extract byte code from ${project.build.finalName}.ear to see source coverage later -->
     <unzip src="${project.home}/${project.build.finalName}.ear" dest="${source.folder}" />
     <unzip src="${source.folder}/${project.bar.name}" dest="${source.folder}" />

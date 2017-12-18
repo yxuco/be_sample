@@ -13,7 +13,7 @@
         </globalVariable>
         <globalVariable>
             <name>GREETING_PORT</name>
-            <value>9090</value>
+	    <value>9191</value>
             <type>Integer</type>
             <deploymentSettable>true</deploymentSettable>
             <serviceSettable>false</serviceSettable>
