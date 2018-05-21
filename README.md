@@ -1,6 +1,12 @@
 # TIBCO BE CICD Sample Using Maven, jUnit, and Jacoco
 
-### Prerequisites
+  - Illustrate Maven build of application containing multiple Java and [TIBCO BusinessEvents](https://docs.tibco.com/products/tibco-businessevents-5-4-1) (BE) projects;
+  - Illustrate jUnit tests of BE projects using API-mode of BE engines;
+  - Illustrate jUnit tests of BE projects by wrapping tests implemented in BE rule-functions;
+  - Illustrate generation of Jacoco code-coverage reports for BE test suite;
+  - Illustrate collecting and visualizing BE application performance stats using time-series database, i.e., [InfluxDB](https://www.influxdata.com/time-series-platform/influxdb/).
+
+## Prerequisites
 
  - Install TIBCO BusinessEvents 5.4.1, and set env for BE_HOME, e.g., `export BE_HOME=/usr/local/tibco/be/5.4` on Mac, or `set BE_HOME=C:/tibco/be/5.4` on Windows.  Note that you need to use forward slash on Windows, too.
  - Verify that curl is in the PATH, e.g., `curl --version` (download and install curl if it not already available)
@@ -26,7 +32,7 @@ They are not available in Maven Central, and so you need to install them into yo
 
 ## Build the sample
 
-After you clone this project to, e.g., `$workspace/be_sample`, you can build all components of this sample from the project root
+After you clone this project [be_sample](https://github.com/yxuco/be_sample.git) to, e.g., `$workspace/be_sample`, you can build all components of this sample from the project root
 
     cd $workspace/be_sample
     mvn clean install
